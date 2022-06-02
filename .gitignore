@@ -1,3 +1,12 @@
+# Editor Configurations #
+/.idea/
+
+# Output Files #
+/target/
+
+# Module Settings File #
+*.iml
+
 # Compiled class file
 *.class
 
