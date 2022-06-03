@@ -1,11 +1,13 @@
 package api.POJOResponsePayloads.Users;
 
+import java.util.List;
+
 public class GetUsers {
     private double page;
     private double per_page;
     private double total;
     private double total_pages;
-    private Users users;
+    private List<Users> users;
     private Support support;
 
     public double getPage() {
@@ -40,11 +42,11 @@ public class GetUsers {
         this.total_pages = total_pages;
     }
 
-    public Users getUsers() {
+    public List<Users> getUsers() {
         return users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(List<Users> users) {
         this.users = users;
     }
 
