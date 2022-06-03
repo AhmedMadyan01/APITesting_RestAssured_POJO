@@ -1,8 +1,8 @@
 package api.POJOResponsePayloads.Users;
 
 public class Support {
-    public String url;
-    public String text;
+    private String url;
+    private String text;
 
     public String getUrl() {
         return url;
