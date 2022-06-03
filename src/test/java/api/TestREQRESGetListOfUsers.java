@@ -1,6 +1,7 @@
 package api;
 
 import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
+import api.POJOResponsePayloads.GetListOfUsersREQRES.Users;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
-    private static final String requestURL_GetUsersEndpoint =("https://reqres.in/api/users?page=2");
+    private static final String requestURL_GetUsersEndpoint = ("https://reqres.in/api/users?page=2");
 
     @BeforeClass
     public void sendRequest() {
@@ -30,6 +31,15 @@ public class TestREQRESGetListOfUsers {
 
         // Extract users first name using foreach
         users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
+    }
+
+    @Test
+    public void getUserEmailForUserIDNoTen() {
+        for (int i = 0; i < users.getData().size(); i++) {
+            if (users.getData().get(i).getId() == 10) {
+                System.out.println("User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());
+            }
+        }
     }
 
     @Test
