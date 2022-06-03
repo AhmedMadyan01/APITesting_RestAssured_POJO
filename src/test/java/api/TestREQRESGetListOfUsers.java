@@ -22,38 +22,14 @@ public class TestREQRESGetListOfUsers {
     }
 
     @Test
-    public void getNoOfUsers() {
-        Assert.assertEquals(users.getData().size(), 6);
-        System.out.println("No. of users:" + users.getData().size());
+    public void assertNumberOfUsers() throws IOException, ParseException {
+        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
+        Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
     }
 
     @Test
-    public void getUsersFirstName() {
-        // Extract users first name using for loop
-        for (int i = 0; i < users.getData().size(); i++) {
-            System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
-        }
-
-        // Extract users first name using foreach
-        users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
-    }
-
-    @Test
-    public void getUserEmailForUserIDNoTen() {
-        for (int i = 0; i < users.getData().size(); i++) {
-            if (users.getData().get(i).getId() == 10) {
-                System.out.println("User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());
-            }
-        }
-    }
-
-    @Test
-    public void assertOnNumberOfUsers() {
-        Assert.assertEquals(users.getData().size(), 6);
-    }
-
-    @Test
-    public void assertOnResponseRootKeyValues() {
+    public void assertOnResponseRootKeyValues() throws IOException, ParseException {
+        List<?> expectedData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
         Assert.assertEquals(users.getData().get(2).getFirst_name(), "Tobias");
         Assert.assertEquals(users.getPage(), 2);
         Assert.assertEquals(users.getPer_page(), 6);
@@ -63,7 +39,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertAllUserDataObjects() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
         for (int i = 0; i < users.getData().size(); i++) {
             // Retrieve expected data
             HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
@@ -77,6 +53,29 @@ public class TestREQRESGetListOfUsers {
             Assert.assertEquals(expectedFirstNames.get("first_name"), (users.getData().get(i).getFirst_name()));
             Assert.assertEquals(expectedLastNames.get("last_name"), (users.getData().get(i).getLast_name()));
             Assert.assertEquals(expectedAvatars.get("avatar"), (users.getData().get(i).getAvatar()));
+        }
+    }
+
+    public int getNumberOfUsers() {
+        System.out.println("No. of users:" + users.getData().size());
+        return users.getData().size();
+    }
+
+    public void getUsersFirstName() {
+        // Extract users first name using for loop
+        for (int i = 0; i < users.getData().size(); i++) {
+            System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
+        }
+
+        // Extract users first name using foreach
+        users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
+    }
+
+    public void getUserEmailForUserIDNoTen() {
+        for (int i = 0; i < users.getData().size(); i++) {
+            if (users.getData().get(i).getId() == 10) {
+                System.out.println("User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());
+            }
         }
     }
 }
