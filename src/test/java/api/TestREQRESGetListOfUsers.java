@@ -22,7 +22,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void getUsersFirstName() {
-        for (int i = 0; i <= users.getData().size() - 1; i++) {
+        for (int i = 0; i < users.getData().size(); i++) {
             System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
         }
     }
