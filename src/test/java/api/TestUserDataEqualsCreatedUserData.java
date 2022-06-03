@@ -11,6 +11,6 @@ public class TestUserDataEqualsCreatedUserData {
         CreateUsers createUser = new CreateUsers();
         createUser.setName("Ahmed");
         createUser.setJob("Software Test Automation Engineer");
-        User user = RestAssured.given().when().post("https://reqres.in/api/users").body(createUser).as(User.class);
+//        User user = RestAssured.given().when().post("https://reqres.in/api/users").body().as(CreateUsers.class).(User.class);
     }
 }
