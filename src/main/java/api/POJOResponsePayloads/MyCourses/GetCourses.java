@@ -1,6 +1,4 @@
-package api.POJOResponsePayloads.Courses;
-
-import java.util.List;
+package api.POJOResponsePayloads.MyCourses;
 
 public class GetCourses {
     private String url;

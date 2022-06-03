@@ -7,7 +7,7 @@ public class GetUsers {
     private double per_page;
     private double total;
     private double total_pages;
-    private List<Users> users;
+    private List<Users> data;
     private Support support;
 
     public double getPage() {
@@ -42,12 +42,12 @@ public class GetUsers {
         this.total_pages = total_pages;
     }
 
-    public List<Users> getUsers() {
-        return users;
+    public List<Users> getData() {
+        return data;
     }
 
-    public void setUsers(List<Users> users) {
-        this.users = users;
+    public void setData(List<Users> data) {
+        this.data = data;
     }
 
     public Support getSupport() {
