@@ -1,16 +1,22 @@
 package api;
 
+import Utilities.JSONManager;
 import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 public class TestREQRESGetListOfUsers {
     Gson gson = new Gson();
 
-//`    JSObject listOfUsersExpectedResponse= JSObject
+    //`    JSObject listOfUsersExpectedResponse= JSObject
     private static GetUsers users = new GetUsers();
     private static final String requestURL_GetUsersEndpoint = ("https://reqres.in/api/users?page=2");
 
@@ -60,7 +66,11 @@ public class TestREQRESGetListOfUsers {
     }
 
     @Test
-    public void assertOnWholeUsersData() {
-        gson.newJsonReader()
+    public void assertOnWholeUsersData() throws IOException, ParseException {
+//        List<String> users_IDs = (List<String>) JSONManager.getJSONData("C:\\Users\\ahmed\\OneDrive\\Documents\\GitHub\\APITesting_RestAssured_POJO\\src\\test\\resources\\ExpectedResponsePayloads\\getListOfUsersREQRES.json","data.id", JSONManager.Types.STRING);
+//        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json","data", JSONManager.Types.STRING).toString());
+//        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST));
+        List<Map<?, ?>> users = (List<Map<?, ?>>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.ReturnDataTypes.LIST);
+        System.out.println(users.get(0).get("id"));
     }
 }
