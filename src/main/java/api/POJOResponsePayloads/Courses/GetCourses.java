@@ -1,10 +1,12 @@
 package api.POJOResponsePayloads.Courses;
 
+import java.util.List;
+
 public class GetCourses {
     private String url;
     private String services;
     private String expertises;
-    private Courses courses;
+    private List<Courses> courses;
     private String instructor;
     private String linkedIn;
 
@@ -20,7 +22,7 @@ public class GetCourses {
         return expertises;
     }
 
-    public Courses getCourses() {
+    public List<Courses> getCourses() {
         return courses;
     }
 
