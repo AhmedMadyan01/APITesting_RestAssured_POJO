@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.AllCourses;
+package api.pojoResponsePayloads.AllCourses;
 
 public class Course {
     private String name;

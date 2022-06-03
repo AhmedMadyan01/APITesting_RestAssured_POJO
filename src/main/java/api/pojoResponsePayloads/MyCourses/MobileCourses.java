@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.MyCourses;
+package api.pojoResponsePayloads.MyCourses;
 
 public class MobileCourses {
     private String courseTitle;

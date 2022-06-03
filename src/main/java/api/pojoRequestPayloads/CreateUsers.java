@@ -1,4 +1,4 @@
-package api.POJORequestPayloads;
+package api.pojoRequestPayloads;
 
 public class CreateUsers {
     private String name;

@@ -1,8 +1,6 @@
 package api;
 
-import api.POJORequestPayloads.CreateUsers;
-import api.POJOResponsePayloads.CreateUser.User;
-import io.restassured.RestAssured;
+import api.pojoRequestPayloads.CreateUsers;
 import org.testng.annotations.Test;
 
 public class TestUserDataEqualsCreatedUserData {

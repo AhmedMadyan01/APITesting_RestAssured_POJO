@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.GetListOfUsersREQRES;
+package api.pojoResponsePayloads.GetListOfUsersREQRES;
 
 import java.util.List;
 

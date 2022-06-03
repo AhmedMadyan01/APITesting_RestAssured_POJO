@@ -1,4 +1,4 @@
-package Utilities;
+package utilities;
 
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;

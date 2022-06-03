@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.GetListOfUsersREQRES;
+package api.pojoResponsePayloads.GetListOfUsersREQRES;
 
 public class Users {
     private double id;

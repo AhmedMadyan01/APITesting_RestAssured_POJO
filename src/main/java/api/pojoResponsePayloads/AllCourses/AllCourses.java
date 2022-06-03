@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.AllCourses;
+package api.pojoResponsePayloads.AllCourses;
 
 import java.util.List;
 
