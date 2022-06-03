@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.AhmedMadyan</groupId>
+    <groupId>io.madyan</groupId>
     <artifactId>APITesting_RestAssured_POJO</artifactId>
     <version>1.0</version>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -106,13 +106,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
             <version>${json-path-rest-assured.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-path</artifactId>
-            <version>${json-path-rest-assured.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
