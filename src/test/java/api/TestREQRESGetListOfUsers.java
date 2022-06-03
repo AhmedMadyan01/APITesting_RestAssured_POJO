@@ -2,7 +2,6 @@ package api;
 
 import Utilities.JSONManager;
 import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
-import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
@@ -10,8 +9,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
@@ -63,12 +62,21 @@ public class TestREQRESGetListOfUsers {
     }
 
     @Test
-    public void assertOnWholeUsersData() throws IOException, ParseException {
-        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.STRING).toString());
-        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST));
-        List<Map<?, ?>> users = (List<Map<?, ?>>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST);
-        System.out.println(users.get(0).get("id"));
-        Map<?, ?> totalPage = (Map<?, ?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "support", JSONManager.Types.MAP);
-        System.out.println(totalPage.get("url"));
+    public void assertAllUserDataObjects() throws IOException, ParseException {
+        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST);
+        for (int i = 0; i < users.getData().size(); i++) {
+            // Retrieve expected data
+            HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
+            HashMap<?, ?> expectedUsersEmails = (HashMap<?, ?>) expectedUsersData.get(i);
+            HashMap<?, ?> expectedFirstNames = (HashMap<?, ?>) expectedUsersData.get(i);
+            HashMap<?, ?> expectedLastNames = (HashMap<?, ?>) expectedUsersData.get(i);
+            HashMap<?, ?> expectedAvatars = (HashMap<?, ?>) expectedUsersData.get(i);
+            // Assertion for all users
+            Assert.assertEquals(expectedUsersIDs.get("id"), (int) (users.getData().get(i).getId()));
+            Assert.assertEquals(expectedUsersEmails.get("email"), (users.getData().get(i).getEmail()));
+            Assert.assertEquals(expectedFirstNames.get("first_name"), (users.getData().get(i).getFirst_name()));
+            Assert.assertEquals(expectedLastNames.get("last_name"), (users.getData().get(i).getLast_name()));
+            Assert.assertEquals(expectedAvatars.get("avatar"), (users.getData().get(i).getAvatar()));
+        }
     }
 }
