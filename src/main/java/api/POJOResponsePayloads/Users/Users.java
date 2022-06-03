@@ -1,11 +1,11 @@
 package api.POJOResponsePayloads.Users;
 
 public class Users {
-    public double id;
-    public String email;
-    public String first_name;
-    public String last_name;
-    public String avatar;
+    private double id;
+    private String email;
+    private String first_name;
+    private String last_name;
+    private String avatar;
 
     public double getId() {
         return id;
