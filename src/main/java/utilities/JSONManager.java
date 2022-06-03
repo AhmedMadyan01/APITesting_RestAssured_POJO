@@ -21,7 +21,7 @@ public class JSONManager {
      *
      * @return FileReader type, JSON File stored in @param reader value
      */
-    public static FileReader readFileJSON(String filePath) throws IOException, ParseException {
+    public static FileReader readFileJSON(String filePath) {
         if (filePath != null)
             try {
                 reader = new FileReader(filePath);
