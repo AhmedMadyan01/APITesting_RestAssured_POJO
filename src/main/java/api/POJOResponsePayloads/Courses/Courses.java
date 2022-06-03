@@ -3,31 +3,31 @@ package api.POJOResponsePayloads.Courses;
 import java.util.List;
 
 public class Courses {
-    private List<WebAutomation> webAutomation;
-    private List<API> api;
-    private List<Mobile> mobile;
+    private List<WebAutomationCourses> webAutomationCourses;
+    private List<APICourses> apiCourses;
+    private List<MobileCourses> mobileCourses;
 
-    public List<WebAutomation> getWebAutomation() {
-        return webAutomation;
+    public List<WebAutomationCourses> getWebAutomation() {
+        return webAutomationCourses;
     }
 
-    public void setWebAutomation(List<WebAutomation> webAutomation) {
-        this.webAutomation = webAutomation;
+    public void setWebAutomation(List<WebAutomationCourses> webAutomationCourses) {
+        this.webAutomationCourses = webAutomationCourses;
     }
 
-    public List<API> getApi() {
-        return api;
+    public List<APICourses> getApi() {
+        return apiCourses;
     }
 
-    public void setApi(List<API> api) {
-        this.api = api;
+    public void setApi(List<APICourses> apiCourses) {
+        this.apiCourses = apiCourses;
     }
 
-    public List<Mobile> getMobile() {
-        return mobile;
+    public List<MobileCourses> getMobile() {
+        return mobileCourses;
     }
 
-    public void setMobile(List<Mobile> mobile) {
-        this.mobile = mobile;
+    public void setMobile(List<MobileCourses> mobileCourses) {
+        this.mobileCourses = mobileCourses;
     }
 }
