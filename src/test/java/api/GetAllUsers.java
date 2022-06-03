@@ -1,12 +1,9 @@
 package api;
 
-import api.POJOResponsePayloads.Users.GetUsers;
+import api.POJOResponsePayloads.GetListOfUsers.GetUsers;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class GetAllUsers {
     @Test

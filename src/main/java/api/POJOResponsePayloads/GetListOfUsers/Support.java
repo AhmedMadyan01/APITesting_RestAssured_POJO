@@ -1,4 +1,4 @@
-package api.POJOResponsePayloads.Users;
+package api.POJOResponsePayloads.GetListOfUsers;
 
 public class Support {
     private String url;
