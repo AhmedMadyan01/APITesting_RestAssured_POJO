@@ -24,7 +24,7 @@ public class GetAllUsers {
         Assert.assertEquals(getUsers.getData().size(), 6);
         Assert.assertEquals(getUsers.getData().get(2).getFirst_name(), "Tobias");
         for (int i = 0; i <= getUsers.getData().size() - 1; i++) {
-            System.out.println("User " + i + " First Name: " + getUsers.getData().get(i).getFirst_name());
+            System.out.println("User " + (i + 1) + " First Name: " + getUsers.getData().get(i).getFirst_name());
         }
     }
 }
