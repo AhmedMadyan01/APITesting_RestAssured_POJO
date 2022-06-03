@@ -1,12 +1,19 @@
 package api;
 
 import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
+import com.google.gson.Gson;
 import io.restassured.RestAssured;
+import netscape.javascript.JSObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.FileReader;
+
 public class TestREQRESGetListOfUsers {
+    Gson gson = new Gson();
+
+//`    JSObject listOfUsersExpectedResponse= JSObject
     private static GetUsers users = new GetUsers();
     private static final String requestURL_GetUsersEndpoint = ("https://reqres.in/api/users?page=2");
 
@@ -53,5 +60,10 @@ public class TestREQRESGetListOfUsers {
         Assert.assertEquals(users.getPer_page(), 6);
         Assert.assertEquals(users.getTotal(), 12);
         Assert.assertEquals(users.getTotal_pages(), 2);
+    }
+
+    @Test
+    public void assertOnWholeUsersData() {
+        gson.newJsonReader()
     }
 }
