@@ -1,6 +1,6 @@
 package api;
 
-import api.POJOResponsePayloads.GetListOfUsers.GetUsers;
+import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
