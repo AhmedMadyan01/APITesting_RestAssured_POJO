@@ -6,15 +6,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-import java.util.List;
-
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
+    private static final String requestURL_GetUsersEndpoint =("https://reqres.in/api/users?page=2");
 
     @BeforeClass
     public void sendRequest() {
-        users = RestAssured.given().when().get("https://reqres.in/api/users?page=2").as(GetUsers.class);
+        users = RestAssured.given().when().get(requestURL_GetUsersEndpoint).as(GetUsers.class);
     }
 
     @Test
