@@ -67,10 +67,11 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertOnWholeUsersData() throws IOException, ParseException {
-//        List<String> users_IDs = (List<String>) JSONManager.getJSONData("C:\\Users\\ahmed\\OneDrive\\Documents\\GitHub\\APITesting_RestAssured_POJO\\src\\test\\resources\\ExpectedResponsePayloads\\getListOfUsersREQRES.json","data.id", JSONManager.Types.STRING);
-//        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json","data", JSONManager.Types.STRING).toString());
-//        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST));
-        List<Map<?, ?>> users = (List<Map<?, ?>>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.ReturnDataTypes.LIST);
+        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json","data", JSONManager.Types.STRING).toString());
+        System.out.println(JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST));
+        List<Map<?, ?>> users = (List<Map<?, ?>>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "data", JSONManager.Types.LIST);
         System.out.println(users.get(0).get("id"));
+        Map<?, ?> totalPage = (Map<?, ?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "support", JSONManager.Types.MAP);
+        System.out.println(totalPage.get("url"));
     }
 }
