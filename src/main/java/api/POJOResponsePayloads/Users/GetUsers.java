@@ -1,24 +1,58 @@
 package api.POJOResponsePayloads.Users;
 
-import java.util.ArrayList;
-
 public class GetUsers {
-    public double page;
-    public double per_page;
-    public double total;
-    public double total_pages;
-    public ArrayList<data> users;
+    private double page;
+    private double per_page;
+    private double total;
+    private double total_pages;
+    private Users users;
+    private Support support;
 
-    public class data{
-        public double id;
-        public String email;
-        public String first_name;
-        public String last_name;
-        public String avatar;
+    public double getPage() {
+        return page;
     }
 
-    public  class support{
-        public String url;
-        public String text;
+    public void setPage(double page) {
+        this.page = page;
+    }
+
+    public double getPer_page() {
+        return per_page;
+    }
+
+    public void setPer_page(double per_page) {
+        this.per_page = per_page;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getTotal_pages() {
+        return total_pages;
+    }
+
+    public void setTotal_pages(double total_pages) {
+        this.total_pages = total_pages;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Support getSupport() {
+        return support;
+    }
+
+    public void setSupport(Support support) {
+        this.support = support;
     }
 }
