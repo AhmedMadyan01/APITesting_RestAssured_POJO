@@ -108,6 +108,12 @@
             <version>${json-path-rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${json-path-rest-assured.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
