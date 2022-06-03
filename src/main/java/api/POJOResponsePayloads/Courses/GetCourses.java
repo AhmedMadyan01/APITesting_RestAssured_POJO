@@ -6,7 +6,7 @@ public class GetCourses {
     private String url;
     private String services;
     private String expertises;
-    private List<Courses> courses;
+    private Courses courses;
     private String instructor;
     private String linkedIn;
 
@@ -22,7 +22,7 @@ public class GetCourses {
         return expertises;
     }
 
-    public List<Courses> getCourses() {
+    public Courses getCourses() {
         return courses;
     }
 
