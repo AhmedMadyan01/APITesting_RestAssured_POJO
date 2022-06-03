@@ -8,14 +8,11 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JSONManager {
-
     private static FileReader reader;
-    private static final JSONParser parser = new JSONParser();
-
     private static JsonPath jsonPath;
     private static JSONObject object = null;
 
@@ -27,21 +24,26 @@ public class JSONManager {
                 throw new RuntimeException(e);
             }
         else System.out.println("Please send the JSON file path");
+        JSONParser parser = new JSONParser();
         object = (JSONObject) parser.parse(reader);
         return object;
     }
 
-    public static void getJSONData(JSONObject object, String keyPath, ReturnDataTypes type) {
-
+    public static Object getJSONData(JSONObject object, String keyPath, Types type) {
+        return getObject(keyPath, type, object);
     }
 
-    public static Object getJSONData(String filePath, String keyPath, ReturnDataTypes type) throws IOException, ParseException {
+    public static Object getJSONData(String filePath, String keyPath, Types type) throws IOException, ParseException {
         object = readJSONFile(filePath);
+        return getObject(keyPath, type, object);
+    }
+
+    private static Object getObject(String keyPath, Types type, JSONObject object) {
         Object data;
         switch (type) {
-            case STRING -> data = getStringFromJSONObject(object, keyPath);
-            case HASHMAP -> data = getHashMapFromJSONObject(object, keyPath);
-            case LIST -> data = getListFromJSONObject(object, keyPath);
+            case STRING -> data = getDataAsString(object, keyPath);
+            case MAP -> data = getDataAsMap(object, keyPath);
+            case LIST -> data = getDataAsList(object, keyPath);
             default -> throw new IllegalStateException("Unexpected value: " + type);
         }
         if (data != null)
@@ -52,22 +54,22 @@ public class JSONManager {
         return null;
     }
 
-    private static String getStringFromJSONObject(JSONObject object, String keyPath) {
+    private static String getDataAsString(JSONObject object, String keyPath) {
         jsonPath = new JsonPath(String.valueOf(object));
         return jsonPath.getJsonObject(keyPath).toString();
     }
 
-    private static List<?> getListFromJSONObject(JSONObject object, String keyPath) {
+    private static Map<?, ?> getDataAsMap(JSONObject object, String keyPath) {
+        jsonPath = new JsonPath(String.valueOf(object));
+        return jsonPath.getMap(keyPath);
+    }
+
+    private static List<?> getDataAsList(JSONObject object, String keyPath) {
         jsonPath = new JsonPath(String.valueOf(object));
         return jsonPath.getList(keyPath);
     }
 
-    private static HashMap<?, ?> getHashMapFromJSONObject(JSONObject object, String keyPath) {
-        jsonPath = new JsonPath(String.valueOf(object));
-        return jsonPath.getJsonObject(keyPath);
-    }
-
-    public enum ReturnDataTypes {
-        STRING, HASHMAP, LIST
+    public enum Types {
+        STRING, MAP, LIST
     }
 }
