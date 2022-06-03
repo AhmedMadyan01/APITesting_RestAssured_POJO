@@ -11,6 +11,7 @@ public class GetAllUsers {
         GetUsers getUsers =
                 RestAssured.given().when().get("https://reqres.in/api/users?page=2").as(GetUsers.class);
         Assert.assertEquals(getUsers.getData().size(), 6);
+        Assert.assertEquals(getUsers.getData().get(2).getFirst_name(), "Tobias");
         System.out.println(getUsers.getData().size());
     }
 }
