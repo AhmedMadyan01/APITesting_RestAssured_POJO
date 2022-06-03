@@ -3,12 +3,9 @@ package api;
 import api.POJOResponsePayloads.GetListOfUsersREQRES.GetUsers;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
-import netscape.javascript.JSObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.io.FileReader;
 
 public class TestREQRESGetListOfUsers {
     Gson gson = new Gson();
