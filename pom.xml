@@ -17,10 +17,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-
         <!-- Maven surface plugin configurations -->
         <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
-
         <!-- Dependencies and plugins versions -->
         <testNG.version>7.6.0</testNG.version>
         <rest-assured.version>5.1.0</rest-assured.version>
