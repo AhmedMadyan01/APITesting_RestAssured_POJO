@@ -32,6 +32,8 @@
         <org.json.version>20220320</org.json.version>
         <json-simple.version>1.1.1</json-simple.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
+        <!-- Maven surface plugin configurations -->
+        <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
     </properties>
 
     <dependencies>
@@ -106,7 +108,7 @@
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <suiteXmlFiles>
-                            <suiteXmlFile>testng.xml</suiteXmlFile>
+                            <suiteXmlFile>${surefire.suiteXmlFiles}</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
