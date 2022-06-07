@@ -4,7 +4,6 @@
     <test verbose="2" name="APITesting_RestAssured_POJO">
         <classes>
             <class name="api.TestREQRESGetListOfUsers"/>
-            <class name="api.TestUserDataEqualsCreatedUserData"/>
             <class name="jsonManager.TestJSONManager"/>
         </classes>
     </test>
