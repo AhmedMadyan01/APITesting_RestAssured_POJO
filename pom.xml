@@ -13,10 +13,15 @@
     <url>https://github.com/AhmedMadyan01/APITesting_RestAssured_POJO</url>
 
     <properties>
-        <!-- Dependencies and plugins versions -->
+        <!-- Maven project build configurations -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
+
+        <!-- Maven surface plugin configurations -->
+        <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
+
+        <!-- Dependencies and plugins versions -->
         <testNG.version>7.6.0</testNG.version>
         <rest-assured.version>5.1.0</rest-assured.version>
         <json-path-rest-assured.version>${rest-assured.version}</json-path-rest-assured.version>
@@ -32,8 +37,6 @@
         <org.json.version>20220320</org.json.version>
         <json-simple.version>1.1.1</json-simple.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
-        <!-- Maven surface plugin configurations -->
-        <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
     </properties>
 
     <dependencies>
