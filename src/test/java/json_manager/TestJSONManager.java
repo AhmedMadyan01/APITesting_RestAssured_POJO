@@ -1,4 +1,4 @@
-package jsonManager;
+package json_manager;
 
 import utilities.JSONManager;
 import org.json.simple.parser.ParseException;
