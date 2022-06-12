@@ -5,8 +5,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.madyan</groupId>
-    <artifactId>APITesting_RestAssured_POJO</artifactId>
+    <groupId>org.madyan</groupId>
+    <artifactId>api-testing-rest-assured-pojo</artifactId>
     <version>1.0</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Rest-Assured and POJO Automation Framework</description>
