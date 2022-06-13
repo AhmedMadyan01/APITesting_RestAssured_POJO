@@ -5,7 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.Test;
 
-public class GetAllCourses {
+public class TestGetAllCourses {
 
     @Test
     public void getNumberOfCourses() {
