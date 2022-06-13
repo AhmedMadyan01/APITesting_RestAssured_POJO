@@ -2,7 +2,7 @@ package api.pojo_request_payloads.google_maps;
 
 public class Location {
     private double lat;
-    private double ing;
+    private double lng;
 
     public double getLat() {
         return lat;
@@ -12,11 +12,11 @@ public class Location {
         this.lat = lat;
     }
 
-    public double getIng() {
-        return ing;
+    public double getLng() {
+        return lng;
     }
 
-    public void setIng(double ing) {
-        this.ing = ing;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }
