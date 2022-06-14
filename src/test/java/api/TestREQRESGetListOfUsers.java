@@ -1,7 +1,7 @@
 package api;
 
 import utilities.JSONManager;
-import api.pojoResponsePayloads.GetListOfUsersREQRES.GetUsers;
+import api.pojo_response_payloads.users_reqres.GetUsers;
 import io.restassured.RestAssured;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;

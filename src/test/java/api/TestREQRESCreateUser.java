@@ -1,6 +1,6 @@
 package api;
 
-import api.pojoResponsePayloads.CreateUser.User;
+import api.pojo_response_payloads.create_user.User;
 import api.pojo_request_payloads.reqres.CreateUser;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

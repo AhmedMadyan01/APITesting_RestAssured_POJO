@@ -1,6 +1,6 @@
-package api.pojoResponsePayloads.MyCourses;
+package api.pojo_response_payloads.my_courses;
 
-public class MobileCourses {
+public class APICourses {
     private String courseTitle;
     private String price;
 

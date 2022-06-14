@@ -1,4 +1,4 @@
-package api.pojoResponsePayloads.GetListOfUsersREQRES;
+package api.pojo_response_payloads.users_reqres;
 
 public class Support {
     private String url;
