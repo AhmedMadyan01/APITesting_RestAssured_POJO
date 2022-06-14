@@ -34,7 +34,7 @@ public class TestGoogleMapsAddPlace {
         RestAssured.baseURI = "https://courses.rahulshettyacademy.com";
         RestAssured.basePath = "/maps/api/place/add/json";
         response = RestAssured.
-                given().
+                given().log().all().
                 queryParam("key", "qaclick123").
                 body(googleMapsAddPlace).
                 when().
