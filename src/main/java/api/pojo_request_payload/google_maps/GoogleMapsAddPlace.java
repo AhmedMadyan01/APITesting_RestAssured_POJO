@@ -1,4 +1,4 @@
-package api.pojo_request_payloads.google_maps;
+package api.pojo_request_payload.google_maps;
 
 import java.util.List;
 
