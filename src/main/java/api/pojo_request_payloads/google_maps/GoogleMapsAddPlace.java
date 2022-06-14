@@ -8,7 +8,7 @@ public class GoogleMapsAddPlace {
     private String name;
     private String phone_number;
     private String address;
-    private List<Type> types;
+    private List<String> types;
     private String website;
     private String language;
 
@@ -52,11 +52,11 @@ public class GoogleMapsAddPlace {
         this.address = address;
     }
 
-    public List<Type> getTypes() {
+    public List<String> getTypes() {
         return types;
     }
 
-    public void setTypes(List<Type> types) {
+    public void setTypes(List<String> types) {
         this.types = types;
     }
 
