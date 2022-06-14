@@ -1,6 +1,6 @@
 package api;
 
-import api.pojo_request_payloads.reqres.CreateUser;
+import api.pojo_request_payload.reqres.CreateUser;
 import org.testng.annotations.Test;
 
 public class TestUserDataEqualsCreatedUserData {

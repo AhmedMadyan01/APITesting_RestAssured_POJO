@@ -1,4 +1,4 @@
-package api.pojo_response_payloads.create_user;
+package api.pojo_response_payload.create_user;
 
 public class User {
     private String id;

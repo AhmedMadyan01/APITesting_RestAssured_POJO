@@ -1,7 +1,7 @@
 package api;
 
-import api.pojo_request_payloads.google_maps.GoogleMapsAddPlace;
-import api.pojo_request_payloads.google_maps.Location;
+import api.pojo_request_payload.google_maps.GoogleMapsAddPlace;
+import api.pojo_request_payload.google_maps.Location;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;

@@ -1,6 +1,6 @@
 package api;
 
-import api.pojo_response_payloads.all_courses.AllCourses;
+import api.pojo_response_payload.all_courses.AllCourses;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.Test;

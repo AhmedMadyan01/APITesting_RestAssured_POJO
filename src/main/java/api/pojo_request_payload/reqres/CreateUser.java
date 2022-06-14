@@ -1,4 +1,4 @@
-package api.pojo_request_payloads.reqres;
+package api.pojo_request_payload.reqres;
 
 public class CreateUser {
     private String name;

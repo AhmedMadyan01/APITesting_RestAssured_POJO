@@ -1,7 +1,7 @@
 package api;
 
-import api.pojo_response_payloads.create_user.User;
-import api.pojo_request_payloads.reqres.CreateUser;
+import api.pojo_response_payload.create_user.User;
+import api.pojo_request_payload.reqres.CreateUser;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
