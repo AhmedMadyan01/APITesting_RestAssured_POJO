@@ -1,6 +1,6 @@
-package api.pojo_request_payloads;
+package api.pojo_request_payloads.reqres;
 
-public class CreateUsers {
+public class CreateUser {
     private String name;
     private String job;
 
