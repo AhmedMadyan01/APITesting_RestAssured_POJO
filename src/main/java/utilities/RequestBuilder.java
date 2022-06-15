@@ -1,17 +1,20 @@
 package utilities;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.net.Authenticator;
 import java.util.List;
 import java.util.Map;
 
-public class RequestBuilder {
-    private RequestSpecification requestSpecification;
+import static io.restassured.RestAssured.given;
 
-    public static RequestSpecification buildRequest
+public class RequestBuilder {
+    private static RequestSpecification buildRequest
             (String baseUri, String port, String basePath, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri(baseUri);
@@ -41,7 +44,24 @@ public class RequestBuilder {
             }
         }
         requestSpecBuilder.log(LogDetail.ALL);
+        requestSpecBuilder.setRelaxedHTTPSValidation();
         return requestSpecBuilder.build();
     }
 
+    public static Response invokeAPI(String baseUri, String port, String basePath, RequestType requestType, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
+        Response response = null;
+        given().relaxedHTTPSValidation();
+        switch (requestType){
+            case GET -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).get().then().extract().response();
+            case POST -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).post().then().extract().response();
+            case PUT -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).put().then().extract().response();
+            case PATCH -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).patch().then().extract().response();
+            case DELETE -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).delete().then().extract().response();
+        }
+        return response;
+    }
+
+    public enum RequestType {
+        POST, GET, PATCH, DELETE, PUT
+    }
 }
