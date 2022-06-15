@@ -12,7 +12,7 @@ public class RequestBuilder {
     private RequestSpecification requestSpecification;
 
     public static RequestSpecification buildRequest
-            (String baseUri, String port, String basePath, List<Map<String, Object>> headers, List<Map<String, Object>> queryParam, List<Map<String, Object>> formParam, ContentType contentType) {
+            (String baseUri, String port, String basePath, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri(baseUri);
         requestSpecBuilder.setBasePath(basePath);
@@ -23,6 +23,23 @@ public class RequestBuilder {
             requestSpecBuilder.setContentType(contentType);
         }
 
+        if (headers != null && !headers.isEmpty()) {
+            for (int i = 0; i <= headers.size(); i++) {
+                requestSpecBuilder.addHeaders(headers.get(i));
+            }
+        }
+
+        if (queryParam != null && !queryParam.isEmpty()) {
+            for (int i = 0; i <= queryParam.size(); i++) {
+                requestSpecBuilder.addHeaders(queryParam.get(i));
+            }
+        }
+
+        if (formParam != null && !formParam.isEmpty()) {
+            for (int i = 0; i <= formParam.size(); i++) {
+                requestSpecBuilder.addHeaders(formParam.get(i));
+            }
+        }
         requestSpecBuilder.log(LogDetail.ALL);
         return requestSpecBuilder.build();
     }
