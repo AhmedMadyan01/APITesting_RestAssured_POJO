@@ -22,7 +22,6 @@ public class TestREQRESGetListOfUsers {
     @BeforeClass
     public void sendRequest() {
         users = RequestBuilder.performRequest(baseURi, null, basePath, RequestMethod.GET, null, null, null, ContentType.JSON).as(GetUsers.class);
-
     }
 
     @Test
@@ -69,7 +68,6 @@ public class TestREQRESGetListOfUsers {
         for (int i = 0; i < users.getData().size(); i++) {
             System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
         }
-
         // Extract users first name using foreach
         users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
     }
