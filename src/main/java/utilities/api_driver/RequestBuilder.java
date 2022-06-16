@@ -1,13 +1,11 @@
-package utilities;
+package utilities.api_driver;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.net.Authenticator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,20 +46,17 @@ public class RequestBuilder {
         return requestSpecBuilder.build();
     }
 
-    public static Response invokeAPI(String baseUri, String port, String basePath, RequestType requestType, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
+    public static Response invokeAPI(String baseUri, String port, String basePath, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
         Response response = null;
         given().relaxedHTTPSValidation();
-        switch (requestType){
+        switch (requestMethod){
             case GET -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).get().then().extract().response();
             case POST -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).post().then().extract().response();
             case PUT -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).put().then().extract().response();
             case PATCH -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).patch().then().extract().response();
             case DELETE -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).delete().then().extract().response();
+            default ->
         }
         return response;
-    }
-
-    public enum RequestType {
-        POST, GET, PATCH, DELETE, PUT
     }
 }
