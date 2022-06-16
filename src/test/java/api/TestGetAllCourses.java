@@ -13,7 +13,7 @@ public class TestGetAllCourses {
 //        AllCourses allCourses =
 //                RestAssured.given().expect().defaultParser(Parser.JSON).when().get("https://www.rahulshettyacademy.com/api/course").as(AllCourses.class);
         AllCourses allCourses =
-                RequestBuilder.invokeAPI("https://www.rahulshettyacademy.com", null, "/api/course", RequestMethod.GET, null, null, null, ContentType.JSON).as(AllCourses.class);
+                RequestBuilder.performRequest("https://www.rahulshettyacademy.com", null, "/api/course", RequestMethod.GET, null, null, null, ContentType.JSON).as(AllCourses.class);
         System.out.println(allCourses.getCourses());
     }
 }
