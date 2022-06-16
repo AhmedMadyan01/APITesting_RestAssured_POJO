@@ -1,14 +1,12 @@
 package api;
 
-import api.pojo_response_payload.all_courses.AllCourses;
-import io.restassured.http.ContentType;
-import utilities.JSONManager;
 import api.pojo_response_payload.users_reqres.GetUsers;
-import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utilities.JSONManager;
 import utilities.api_driver.RequestBuilder;
 import utilities.api_driver.RequestMethod;
 
@@ -44,7 +42,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertAllUserDataObjects() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
         for (int i = 0; i < users.getData().size(); i++) {
             // Retrieve expected data
             HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
