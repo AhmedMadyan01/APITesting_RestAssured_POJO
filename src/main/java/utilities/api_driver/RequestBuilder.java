@@ -49,13 +49,18 @@ public class RequestBuilder {
     public static Response invokeAPI(String baseUri, String port, String basePath, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
         Response response = null;
         given().relaxedHTTPSValidation();
-        switch (requestMethod){
-            case GET -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).get().then().extract().response();
-            case POST -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).post().then().extract().response();
-            case PUT -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).put().then().extract().response();
-            case PATCH -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).patch().then().extract().response();
-            case DELETE -> response = given().spec(buildRequest(baseUri,port,basePath,headers,queryParam,formParam,contentType)).delete().then().extract().response();
-            default ->
+        switch (requestMethod) {
+            case GET ->
+                    response = given().spec(buildRequest(baseUri, port, basePath, headers, queryParam, formParam, contentType)).get().then().extract().response();
+            case POST ->
+                    response = given().spec(buildRequest(baseUri, port, basePath, headers, queryParam, formParam, contentType)).post().then().extract().response();
+            case PUT ->
+                    response = given().spec(buildRequest(baseUri, port, basePath, headers, queryParam, formParam, contentType)).put().then().extract().response();
+            case DELETE ->
+                    response = given().spec(buildRequest(baseUri, port, basePath, headers, queryParam, formParam, contentType)).delete().then().extract().response();
+            case PATCH ->
+                    response = given().spec(buildRequest(baseUri, port, basePath, headers, queryParam, formParam, contentType)).patch().then().extract().response();
+            default -> System.out.println("Kindly select valid HTTP request method");
         }
         return response;
     }
