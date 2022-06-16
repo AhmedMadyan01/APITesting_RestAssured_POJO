@@ -21,7 +21,7 @@ public class TestREQRESGetListOfUsers {
 
     @BeforeClass
     public void sendRequest() {
-        users = RequestBuilder.invokeAPI(baseURi, null, basePath, RequestMethod.GET, null, null, null, ContentType.JSON).as(GetUsers.class);
+        users = RequestBuilder.performRequest(baseURi, null, basePath, RequestMethod.GET, null, null, null, ContentType.JSON).as(GetUsers.class);
 
     }
 
