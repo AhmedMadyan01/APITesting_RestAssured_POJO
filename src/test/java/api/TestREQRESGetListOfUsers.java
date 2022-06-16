@@ -1,5 +1,7 @@
 package api;
 
+import api.pojo_response_payload.all_courses.AllCourses;
+import io.restassured.http.ContentType;
 import utilities.JSONManager;
 import api.pojo_response_payload.users_reqres.GetUsers;
 import io.restassured.RestAssured;
@@ -7,6 +9,8 @@ import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utilities.api_driver.RequestBuilder;
+import utilities.api_driver.RequestMethod;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,24 +18,25 @@ import java.util.List;
 
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
-    private static final String requestURL_GetUsersEndpoint = ("https://reqres.in/api/users?page=2");
+    private static final String baseURi = ("https://reqres.in");
+    private static final String basePath = ("/api/users?page=2");
 
     @BeforeClass
     public void sendRequest() {
-        users = RestAssured.given().when().get(requestURL_GetUsersEndpoint).as(GetUsers.class);
+        users = RequestBuilder.invokeAPI(baseURi, null, basePath, RequestMethod.GET, null, null, null, ContentType.JSON).as(GetUsers.class);
+
     }
 
     @Test
     public void assertNumberOfUsers() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
         Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
     }
 
     @Test
     public void assertOnResponseRootKeyValues() throws IOException, ParseException {
-        List<?> expectedData = (List<?>) JSONManager.getJSONData("src/test/resources/ExpectedResponsePayloads/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
-        Assert.assertEquals(users.getData().get(2).getFirst_name(), "Tobias");
-        Assert.assertEquals(users.getPage(), 2);
+        Assert.assertEquals(users.getData().get(2).getFirst_name(), "Emma");
+        Assert.assertEquals(users.getPage(), 1);
         Assert.assertEquals(users.getPer_page(), 6);
         Assert.assertEquals(users.getTotal(), 12);
         Assert.assertEquals(users.getTotal_pages(), 2);
