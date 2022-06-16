@@ -46,7 +46,7 @@ public class RequestBuilder {
         return requestSpecBuilder.build();
     }
 
-    public static Response invokeAPI(String baseUri, String port, String basePath, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
+    public static Response performRequest(String baseUri, String port, String basePath, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
         Response response = null;
         given().relaxedHTTPSValidation();
         switch (requestMethod) {
