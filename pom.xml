@@ -34,6 +34,7 @@
         <slf4j-simple.version>${slf4j.version}</slf4j-simple.version>
         <org.json.version>20220320</org.json.version>
         <json-simple.version>1.1.1</json-simple.version>
+        <aspectj.version>1.8.10</aspectj.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
     </properties>
 
@@ -111,7 +112,17 @@
                         <suiteXmlFiles>
                             <suiteXmlFile>${surefire.suiteXmlFiles}</suiteXmlFile>
                         </suiteXmlFiles>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
