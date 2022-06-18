@@ -6,8 +6,8 @@ public class ConfigUtils {
     private static String requires_BasePath;
 
     private static void setConfigProperties() {
-        requires_BaseURI = PropertiesReaderManager.getProperties("requires_BaseURI", CONFIG_PROPERTIES_FILE_PATH);
-        requires_BasePath = PropertiesReaderManager.getProperties("requires_BasePath", CONFIG_PROPERTIES_FILE_PATH);
+        requires_BaseURI = PropertiesDataManager.getProperty("requires_BaseURI", CONFIG_PROPERTIES_FILE_PATH);
+        requires_BasePath = PropertiesDataManager.getProperty("requires_BasePath", CONFIG_PROPERTIES_FILE_PATH);
     }
 
     public static String getRequires_BaseURI() {
