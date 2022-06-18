@@ -2,6 +2,7 @@ package api;
 
 import api.pojo_response_payload.users_reqres.GetUsers;
 import io.restassured.http.ContentType;
+import org.apache.http.HttpStatus;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -21,7 +22,7 @@ public class TestREQRESGetListOfUsers {
 
     @BeforeClass
     public void sendRequest() {
-        users = RequestBuilder.performRequest(baseURi, null, basePath, RequestMethod.GET, null, null, null, ContentType.JSON).as(GetUsers.class);
+        users = RequestBuilder.performRequest(baseURi, null, basePath, null,RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK).as(GetUsers.class);
     }
 
     @Test
