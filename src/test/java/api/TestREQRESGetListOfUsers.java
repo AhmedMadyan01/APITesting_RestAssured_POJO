@@ -6,7 +6,7 @@ import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utilities.JSONManager;
+import utilities.utilities.reader_manager.JSONReaderManager;
 import utilities.api_driver.RequestBuilder;
 import utilities.api_driver.RequestMethod;
 
@@ -26,7 +26,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertNumberOfUsers() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONReaderManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONReaderManager.Types.LIST);
         Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
     }
 
@@ -41,7 +41,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertAllUserDataObjects() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONReaderManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONReaderManager.Types.LIST);
         for (int i = 0; i < users.getData().size(); i++) {
             // Retrieve expected data
             HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
