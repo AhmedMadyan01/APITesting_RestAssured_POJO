@@ -1,4 +1,4 @@
-package utilities.reader_manager;
+package utilities.reader_manager.json_reader;
 
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;
