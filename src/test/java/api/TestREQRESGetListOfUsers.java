@@ -6,7 +6,7 @@ import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utilities.utilities.reader_manager.JSONReaderManager;
+import utilities.reader_manager.JSONReaderManager;
 import utilities.api_driver.RequestBuilder;
 import utilities.api_driver.RequestMethod;
 
