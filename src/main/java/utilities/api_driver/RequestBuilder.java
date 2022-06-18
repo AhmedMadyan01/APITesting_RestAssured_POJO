@@ -5,6 +5,7 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,6 @@ public class RequestBuilder {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");
-
         switch (requestMethod) {
             case GET ->
                     response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).get().then().statusCode(expectedStatusCode).extract().response();
@@ -68,7 +68,7 @@ public class RequestBuilder {
                     response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).patch().then().statusCode(expectedStatusCode).extract().response();
             default -> System.out.println("Kindly select valid HTTP request method");
         }
-        System.out.println("All request logs printed.\n");
+        System.out.println("All request logs have been logged.\n");
         return response;
     }
 
@@ -80,7 +80,6 @@ public class RequestBuilder {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");
-
         switch (requestMethod) {
             case GET ->
                     response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).get().then().statusCode(expectedStatusCode).extract().response();
@@ -94,7 +93,7 @@ public class RequestBuilder {
                     response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).patch().then().statusCode(expectedStatusCode).extract().response();
             default -> System.out.println("Kindly select valid HTTP request method");
         }
-        System.out.println("All request logs printed.\n");
+        System.out.println("All request logs have been logged.\n");
         return response;
     }
 }
