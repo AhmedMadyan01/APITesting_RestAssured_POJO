@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class JSONReaderManager {
+public class JSONDataManager {
     private static FileReader reader;
     private static JsonPath jsonPath;
     private static JSONObject object = null;
