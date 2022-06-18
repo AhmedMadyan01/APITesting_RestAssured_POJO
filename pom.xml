@@ -16,8 +16,9 @@
         <!-- Maven project build configurations -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.java.version>17</maven.java.version>
-        <maven.compiler.source>${maven.java.version}}</maven.compiler.source>
-        <maven.compiler.target>${maven.java.version}}</maven.compiler.target>
+        <maven.compiler.release>${maven.java.version}</maven.compiler.release>
+        <maven.compiler.source>${maven.java.version}</maven.compiler.source>
+        <maven.compiler.target>${maven.java.version}</maven.compiler.target>
         <!-- Maven surface plugin configurations -->
         <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
         <!-- Dependencies and plugins versions -->
