@@ -1,6 +1,6 @@
 package json_manager;
 
-import utilities.reader_manager.JSONReaderManager;
+import utilities.reader_manager.json_reader.JSONReaderManager;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.Test;
 
