@@ -4,6 +4,7 @@ import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import utilities.exception_handling.ExceptionHandling;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,9 +38,13 @@ public class JSONDataManager {
      *
      * @return JSONObject data type, the desired JSON Object sent by @param filePath
      */
-    public static JSONObject parseJSON(String filePath) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        object = (JSONObject) parser.parse(readFileJSON(filePath));
+    public static JSONObject parseJSON(String filePath) {
+        try {
+            JSONParser parser = new JSONParser();
+            object = (JSONObject) parser.parse(readFileJSON(filePath));
+        } catch (Exception exception) {
+            ExceptionHandling.handleException(exception);
+        }
         return object;
     }
 
@@ -63,7 +68,7 @@ public class JSONDataManager {
      * @param type
      * @return Object data type, the desired JSON Object sent by @param filePath
      */
-    public static Object getJSONData(String filePath, String keyPath, Types type) throws IOException, ParseException {
+    public static Object getJSONData(String filePath, String keyPath, Types type) {
         object = parseJSON(filePath);
         return getObject(keyPath, type, object);
     }

@@ -11,11 +11,11 @@ import java.util.Map;
 public class TestJSONDataManager {
     @Test
     public void testJsonManager() throws IOException, ParseException {
-        System.out.println(JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.STRING).toString());
-        System.out.println(JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST));
-        List<Map<?,?>> users = (List<Map<?,?>>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
+        System.out.println(JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.STRING).toString());
+        System.out.println(JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST));
+        List<Map<?,?>> users = (List<Map<?,?>>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
         System.out.println(users.get(0).get("id"));
-        Map<?, ?> totalPage = (Map<?, ?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.support", JSONDataManager.Types.MAP);
+        Map<?, ?> totalPage = (Map<?, ?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.support", JSONDataManager.Types.MAP);
         System.out.println(totalPage.get("url"));
     }
 }

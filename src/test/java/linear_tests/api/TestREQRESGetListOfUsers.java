@@ -25,7 +25,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertNumberOfUsers() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
         Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
     }
 
@@ -40,7 +40,7 @@ public class TestREQRESGetListOfUsers {
 
     @Test
     public void assertAllUserDataObjects() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
+        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
         for (int i = 0; i < users.getData().size(); i++) {
             // Retrieve expected data
             HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
