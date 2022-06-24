@@ -21,27 +21,112 @@
         <maven.compiler.target>${maven.java.version}</maven.compiler.target>
         <!-- Maven surface plugin configurations -->
         <surefire.suiteXmlFiles>testng.xml</surefire.suiteXmlFiles>
-        <!-- Dependencies and plugins versions -->
+        <!-- Dependencies versions -->
         <testNG.version>7.6.0</testNG.version>
+        <selenium-java.version>4.2.2</selenium-java.version>
+        <webdrivermanager.version>5.2.0</webdrivermanager.version>
         <rest-assured.version>5.1.1</rest-assured.version>
-        <json-path-rest-assured.version>5.1.1</json-path-rest-assured.version>
+        <json-path-rest-assured.version>${rest-assured.version}</json-path-rest-assured.version>
         <hamcrest.version>1.3</hamcrest.version>
         <jackson.version>2.13.3</jackson.version>
         <jackson-databind.version>${jackson.version}</jackson-databind.version>
         <jackson-annotations.version>${jackson.version}</jackson-annotations.version>
         <jackson-core.version>${jackson.version}</jackson-core.version>
-        <jackson-datatype-jdk8.version>${jackson.version}</jackson-datatype-jdk8.version>
         <gson.version>2.9.0</gson.version>
         <slf4j.version>1.7.36</slf4j.version>
         <slf4j-api.version>${slf4j.version}</slf4j-api.version>
         <slf4j-simple.version>${slf4j.version}</slf4j-simple.version>
         <org.json.version>20220320</org.json.version>
         <json-simple.version>1.1.1</json-simple.version>
+        <cucumber.version>7.3.4</cucumber.version>
+        <cucumber-java.version>${cucumber.version}</cucumber-java.version>
+        <cucumber-core.version>${cucumber.version}</cucumber-core.version>
+        <cucumber-picocontainer.version>${cucumber.version}</cucumber-picocontainer.version>
+        <cucumber-testng.version>${cucumber.version}</cucumber-testng.version>
+        <cucumber-gherkin.version>${cucumber.version}</cucumber-gherkin.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j-api.version>${slf4j.version}</slf4j-api.version>
+        <slf4j-simple.version>${slf4j.version}</slf4j-simple.version>
+        <allure.version>2.18.1</allure.version>
+        <allure-cucumber7-jvm.version>${allure.version}</allure-cucumber7-jvm.version>
+        <allure-testng.version>${allure.version}</allure-testng.version>
+        <extentreports.version>5.0.9</extentreports.version>
+        <extentreports-cucumber7-adapter.version>1.6.0</extentreports-cucumber7-adapter.version>
         <aspectj.version>1.8.10</aspectj.version>
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
+        <lombok.version>1.18.24</lombok.version>
+        <rest-assured.version>5.1.1</rest-assured.version>
+        <json-path-rest-assured.version>${rest-assured.version}</json-path-rest-assured.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <jackson.version>2.13.3</jackson.version>
+        <jackson-databind.version>${jackson.version}</jackson-databind.version>
+        <jackson-annotations.version>${jackson.version}</jackson-annotations.version>
+        <jackson-core.version>${jackson.version}</jackson-core.version>
+        <jackson-datatype-jdk8.version>${jackson.version}</jackson-datatype-jdk8.version>
+        <!-- Plugins versions -->
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.10.0</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>2.22.2</maven-surefire-report-plugin.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber-picocontainer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber-testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>${cucumber-gherkin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>${allure-cucumber7-jvm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>${extentreports-cucumber7-adapter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -112,6 +197,42 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${maven-surefire-report-plugin.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
