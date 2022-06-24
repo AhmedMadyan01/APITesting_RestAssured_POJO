@@ -1,4 +1,4 @@
-package cucumber_tests.page_object_model.fe;
+package cucumber_test.page_object_model.fe;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;

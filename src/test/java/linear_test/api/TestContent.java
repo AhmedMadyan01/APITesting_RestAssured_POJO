@@ -1,4 +1,4 @@
-package linear_tests.api;
+package linear_test.api;
 
 import api.pojo_response_payload.content.Content;
 import io.restassured.common.mapper.TypeRef;

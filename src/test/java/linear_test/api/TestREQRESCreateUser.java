@@ -1,4 +1,4 @@
-package linear_tests.api;
+package linear_test.api;
 
 import api.pojo_response_payload.create_user.User;
 import api.pojo_request_payload.reqres.CreateUser;

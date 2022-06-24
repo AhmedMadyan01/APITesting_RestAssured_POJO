@@ -1,6 +1,6 @@
-package cucumber_tests.step_definition.api;
+package cucumber_test.step_definition.api;
 
-import cucumber_tests.page_object_model.api.REQRES_GetListOfUsers;
+import cucumber_test.page_object_model.api.REQRES_GetListOfUsers;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

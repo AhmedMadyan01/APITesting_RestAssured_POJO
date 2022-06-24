@@ -1,4 +1,4 @@
-package linear_tests.api;
+package linear_test.api;
 
 import api.pojo_request_payload.reqres.CreateUser;
 import org.testng.annotations.Test;

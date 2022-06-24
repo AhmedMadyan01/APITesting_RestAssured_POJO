@@ -1,36 +1,49 @@
-package linear_tests.api;
+package cucumber_test.page_object_model.api;
 
 import api.pojo_response_payload.users_reqres.GetUsers;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.json.simple.parser.ParseException;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import utilities.reader_manager.json_reader.JSONDataManager;
 import utilities.api_driver.RequestBuilder;
 import utilities.api_driver.RequestMethod;
+import utilities.exception_handling.ExceptionHandling;
+import utilities.reader_manager.json_reader.JSONDataManager;
 import utilities.reader_manager.properties_reader.ConfigUtils;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class TestREQRESGetListOfUsers {
+public class REQRES_GetListOfUsers {
     private static GetUsers users = new GetUsers();
-    @BeforeClass
-    public void sendRequest() {
-        users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK).as(GetUsers.class);
+    private static Response response = null;
+
+    public static void invokeReqResGetListOfUserSuccessfully() {
+        response = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(),
+                null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK);
+        users = response.as(GetUsers.class);
     }
 
-    @Test
-    public void assertNumberOfUsers() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
-        Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
+    public static void apiResponseStatusCodeShouldBeSC_OK() {
+        assert response != null;
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
     }
 
-    @Test
-    public void assertOnResponseRootKeyValues() throws IOException, ParseException {
+    public static void assertNumberOfUsers() {
+        try {
+            List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
+            Assert.assertEquals(getNumberOfUsers(), expectedUsersData.size());
+            assertOnResponseRootKeyValues();
+            assertAllUserDataObjects();
+            getNumberOfUsers();
+            getUserEmailForUserIDNoTen();
+            getUsersFirstName();
+        } catch (Exception exception) {
+            ExceptionHandling.handleException(exception);
+        }
+    }
+
+    public static void assertOnResponseRootKeyValues() {
         Assert.assertEquals(users.getData().get(2).getFirst_name(), "Emma");
         Assert.assertEquals(users.getPage(), 1);
         Assert.assertEquals(users.getPer_page(), 6);
@@ -38,9 +51,8 @@ public class TestREQRESGetListOfUsers {
         Assert.assertEquals(users.getTotal_pages(), 2);
     }
 
-    @Test
-    public void assertAllUserDataObjects() throws IOException, ParseException {
-        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/GetListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
+    public static void assertAllUserDataObjects() {
+        List<?> expectedUsersData = (List<?>) JSONDataManager.getJSONData("src/test/resources/expected_response_payload/getListOfUsersREQRES.json", "getListOfUsersREQRES.data", JSONDataManager.Types.LIST);
         for (int i = 0; i < users.getData().size(); i++) {
             // Retrieve expected data
             HashMap<?, ?> expectedUsersIDs = (HashMap<?, ?>) expectedUsersData.get(i);
@@ -57,12 +69,12 @@ public class TestREQRESGetListOfUsers {
         }
     }
 
-    public int getNumberOfUsers() {
+    private static int getNumberOfUsers() {
         System.out.println("No. of users:" + users.getData().size());
         return users.getData().size();
     }
 
-    public void getUsersFirstName() {
+    private static void getUsersFirstName() {
         // Extract users first name using for loop
         for (int i = 0; i < users.getData().size(); i++) {
             System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
@@ -71,7 +83,7 @@ public class TestREQRESGetListOfUsers {
         users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
     }
 
-    public void getUserEmailForUserIDNoTen() {
+    private static void getUserEmailForUserIDNoTen() {
         for (int i = 0; i < users.getData().size(); i++) {
             if (users.getData().get(i).getId() == 10) {
                 System.out.println("User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());

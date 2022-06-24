@@ -1,6 +1,6 @@
-package cucumber_tests.step_definition.fe;
+package cucumber_test.step_definition.fe;
 
-import cucumber_tests.page_object_model.fe.GoogleHomePage;
+import cucumber_test.page_object_model.fe.GoogleHomePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

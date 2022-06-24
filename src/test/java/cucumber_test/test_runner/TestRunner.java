@@ -1,4 +1,4 @@
-package cucumber_tests.test_runner;
+package cucumber_test.test_runner;
 
 import io.cucumber.testng.CucumberOptions;
 import utilities.test_base.TestBase;
@@ -8,7 +8,7 @@ import utilities.test_base.TestBase;
                 publish = true,
                 features = {"src/test/java/cucumber_test/feature"},
                 glue = {"cucumber_test/step_definition"},
-                tags = ("@Sanity"),
+                tags = ("@GETListOfUsers"),
                 plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
         )
 
