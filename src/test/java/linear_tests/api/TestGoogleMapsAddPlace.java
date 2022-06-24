@@ -1,4 +1,4 @@
-package api;
+package linear_tests.api;
 
 import api.pojo_request_payload.google_maps.GoogleMapsAddPlace;
 import api.pojo_request_payload.google_maps.Location;

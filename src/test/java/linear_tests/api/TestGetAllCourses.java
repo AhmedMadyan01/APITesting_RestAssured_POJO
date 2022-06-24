@@ -1,4 +1,4 @@
-package api;
+package linear_tests.api;
 
 import api.pojo_response_payload.all_courses.AllCourses;
 import io.restassured.http.ContentType;

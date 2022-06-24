@@ -1,4 +1,4 @@
-package json_manager;
+package linear_tests.json_manager;
 
 import utilities.reader_manager.json_reader.JSONDataManager;
 import org.json.simple.parser.ParseException;

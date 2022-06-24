@@ -1,4 +1,4 @@
-package api;
+package linear_tests.api;
 
 import api.pojo_response_payload.users_reqres.GetUsers;
 import io.restassured.http.ContentType;
