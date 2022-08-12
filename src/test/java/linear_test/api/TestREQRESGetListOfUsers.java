@@ -5,11 +5,11 @@ import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utilities.reader_manager.json_reader.JSONDataManager;
 import utilities.api_driver.RequestBuilder;
 import utilities.api_driver.RequestMethod;
+import utilities.reader_manager.json_reader.JSONDataManager;
 import utilities.reader_manager.properties_reader.ConfigUtils;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
-    @BeforeClass
+    @BeforeMethod
     public void sendRequest() {
         users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK).as(GetUsers.class);
     }

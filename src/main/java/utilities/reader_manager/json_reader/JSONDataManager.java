@@ -3,12 +3,10 @@ package utilities.reader_manager.json_reader;
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import utilities.exception_handling.ExceptionHandling;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
