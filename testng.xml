@@ -3,7 +3,11 @@
 <suite name="All Test Suite">
     <test verbose="2" name="APITesting_RestAssured_POJO">
         <classes>
-            <class name="cucumber_test.test_runner.TestRunner"/>
+            <class name="tests.TestUserDataEqualsCreatedUserData"/>
+            <class name="tests.TestREQRESGetListOfUsers"/>
+            <!--            <class name="tests.TestREQRESCreateUser"/>-->
+            <!--            <class name="tests.TestGoogleMapsAddPlace"/>-->
+            <!--            <class name="tests.TestGetAllCourses"/>-->
         </classes>
     </test>
 </suite>

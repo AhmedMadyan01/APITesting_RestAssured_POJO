@@ -6,10 +6,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.madyan</groupId>
-    <artifactId>api-testing-rest-assured-pojo</artifactId>
+    <artifactId>api-testing-rest-assured-pojo-linear</artifactId>
     <version>1.0</version>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Rest-Assured and POJO Automation Framework</description>
+    <description>Rest-Assured and POJO Linear Automation Framework</description>
     <url>https://github.com/ahmed-madyan/api-testing-rest-assured-pojo</url>
 
     <properties>
