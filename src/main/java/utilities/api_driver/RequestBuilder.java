@@ -25,23 +25,24 @@ public class RequestBuilder {
             requestSpecBuilder.setContentType(contentType);
         }
         if (headers != null && !headers.isEmpty()) {
-            for (int i = 0; i <= headers.size(); i++) {
+            for (int i = 0; i < headers.size(); i++) {
                 requestSpecBuilder.addHeaders(headers.get(i));
             }
         }
         if (queryParam != null && !queryParam.isEmpty()) {
-            for (int i = 0; i <= queryParam.size(); i++) {
+            for (int i = 0; i < queryParam.size(); i++) {
                 requestSpecBuilder.addQueryParams(queryParam.get(i));
             }
         }
         if (formParam != null && !formParam.isEmpty()) {
-            for (int i = 0; i <= formParam.size(); i++) {
+            for (int i = 0; i < formParam.size(); i++) {
                 requestSpecBuilder.addFormParams(formParam.get(i));
             }
         }
         if (requestBody != null) {
             requestSpecBuilder.setBody(requestBody);
         }
+        requestSpecBuilder.setUrlEncodingEnabled(false);
         requestSpecBuilder.log(LogDetail.ALL);
         requestSpecBuilder.setRelaxedHTTPSValidation();
         return requestSpecBuilder.build();
