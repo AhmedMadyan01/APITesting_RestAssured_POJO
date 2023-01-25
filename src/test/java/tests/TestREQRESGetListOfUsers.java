@@ -18,9 +18,10 @@ import java.util.List;
 
 public class TestREQRESGetListOfUsers {
     private static GetUsers users = new GetUsers();
+
     @BeforeMethod
     public void sendRequest() {
-        users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK).as(GetUsers.class);
+        users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK, true).as(GetUsers.class);
     }
 
     @Test

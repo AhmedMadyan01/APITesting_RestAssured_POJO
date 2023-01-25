@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
     private static RequestSpecification buildRequest
-            (String baseUri, String port, String basePath, Object requestBody, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType) {
+            (String baseUri, String port, String basePath, Object requestBody, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType, boolean urlEncodingEnabled) {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri(baseUri);
         requestSpecBuilder.setBasePath(basePath);
@@ -42,7 +42,7 @@ public class RequestBuilder {
         if (requestBody != null) {
             requestSpecBuilder.setBody(requestBody);
         }
-        requestSpecBuilder.setUrlEncodingEnabled(false);
+        requestSpecBuilder.setUrlEncodingEnabled(urlEncodingEnabled);
         requestSpecBuilder.log(LogDetail.ALL);
         requestSpecBuilder.setRelaxedHTTPSValidation();
         return requestSpecBuilder.build();
@@ -52,21 +52,21 @@ public class RequestBuilder {
      * Perform API request
      */
     public static Response performRequest
-    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType, int expectedStatusCode) {
+    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType, int expectedStatusCode, boolean urlEncodingEnabled) {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");
         switch (requestMethod) {
             case GET ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).get().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType, urlEncodingEnabled)).get().then().statusCode(expectedStatusCode).extract().response();
             case POST ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).post().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType, urlEncodingEnabled)).post().then().statusCode(expectedStatusCode).extract().response();
             case PUT ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).put().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType, urlEncodingEnabled)).put().then().statusCode(expectedStatusCode).extract().response();
             case DELETE ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).delete().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType, urlEncodingEnabled)).delete().then().statusCode(expectedStatusCode).extract().response();
             case PATCH ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType)).patch().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, contentType, urlEncodingEnabled)).patch().then().statusCode(expectedStatusCode).extract().response();
             default -> System.out.println("Kindly select valid HTTP request method");
         }
         System.out.println("All request logs have been logged.\n");
@@ -77,21 +77,21 @@ public class RequestBuilder {
      * Perform request without content type
      */
     public static Response performRequest
-    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, int expectedStatusCode) {
+    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, int expectedStatusCode, boolean urlEncodingEnabled) {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");
         switch (requestMethod) {
             case GET ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).get().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null, urlEncodingEnabled)).get().then().statusCode(expectedStatusCode).extract().response();
             case POST ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).post().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null, urlEncodingEnabled)).post().then().statusCode(expectedStatusCode).extract().response();
             case PUT ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).put().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null, urlEncodingEnabled)).put().then().statusCode(expectedStatusCode).extract().response();
             case DELETE ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).delete().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null, urlEncodingEnabled)).delete().then().statusCode(expectedStatusCode).extract().response();
             case PATCH ->
-                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null)).patch().then().statusCode(expectedStatusCode).extract().response();
+                    response = given().spec(buildRequest(baseUri, port, basePath, requestBody, headers, queryParam, formParam, null, urlEncodingEnabled)).patch().then().statusCode(expectedStatusCode).extract().response();
             default -> System.out.println("Kindly select valid HTTP request method");
         }
         System.out.println("All request logs have been logged.\n");
