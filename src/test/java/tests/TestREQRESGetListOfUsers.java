@@ -21,7 +21,7 @@ public class TestREQRESGetListOfUsers {
 
     @BeforeMethod
     public void sendRequest() {
-        users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, ContentType.JSON, HttpStatus.SC_OK, true).as(GetUsers.class);
+        users = RequestBuilder.performRequest(ConfigUtils.getRequires_BaseURI(), null, ConfigUtils.getRequires_BasePath(), null, RequestMethod.GET, null, null, null, HttpStatus.SC_OK, true, ContentType.JSON).as(GetUsers.class);
     }
 
     @Test

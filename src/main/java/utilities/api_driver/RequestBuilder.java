@@ -5,16 +5,14 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
-import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
     private static RequestSpecification buildRequest
-            (String baseUri, String port, String basePath, Object requestBody, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType, boolean urlEncodingEnabled) {
+            (String baseUri, String port, String basePath, Object requestBody, Map<String, String> headers, Map<String, String> queryParam, Map<String, String> formParam, ContentType contentType, boolean urlEncodingEnabled) {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri(baseUri);
         requestSpecBuilder.setBasePath(basePath);
@@ -25,19 +23,14 @@ public class RequestBuilder {
             requestSpecBuilder.setContentType(contentType);
         }
         if (headers != null && !headers.isEmpty()) {
-            for (int i = 0; i < headers.size(); i++) {
-                requestSpecBuilder.addHeaders(headers.get(i));
-            }
+            requestSpecBuilder.addHeaders(headers);
         }
         if (queryParam != null && !queryParam.isEmpty()) {
-            for (int i = 0; i < queryParam.size(); i++) {
-                requestSpecBuilder.addQueryParams(queryParam.get(i));
-            }
+            requestSpecBuilder.addQueryParams(queryParam);
+
         }
         if (formParam != null && !formParam.isEmpty()) {
-            for (int i = 0; i < formParam.size(); i++) {
-                requestSpecBuilder.addFormParams(formParam.get(i));
-            }
+            requestSpecBuilder.addFormParams(formParam);
         }
         if (requestBody != null) {
             requestSpecBuilder.setBody(requestBody);
@@ -52,7 +45,7 @@ public class RequestBuilder {
      * Perform API request
      */
     public static Response performRequest
-    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, ContentType contentType, int expectedStatusCode, boolean urlEncodingEnabled) {
+    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, Map<String, String> headers, Map<String, String> queryParam, Map<String, String> formParam, int expectedStatusCode, boolean urlEncodingEnabled, ContentType contentType) {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");
@@ -77,7 +70,7 @@ public class RequestBuilder {
      * Perform request without content type
      */
     public static Response performRequest
-    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, List<Map<String, String>> headers, List<Map<String, String>> queryParam, List<Map<String, String>> formParam, int expectedStatusCode, boolean urlEncodingEnabled) {
+    (String baseUri, String port, String basePath, Object requestBody, RequestMethod requestMethod, Map<String, String> headers, Map<String, String> queryParam, Map<String, String> formParam, int expectedStatusCode, boolean urlEncodingEnabled) {
         Response response = null;
         given().relaxedHTTPSValidation();
         System.out.println("Printing out request logs:");

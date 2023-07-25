@@ -17,12 +17,10 @@ public class TestFireBase {
     @Test
     public void fireBase() {
         Response response;
-        List<Map<String, String>> query_Param = new ArrayList<>();
         Map<String, String> map = new HashMap<>();
         map.put("key", "AIzaSyAKKukGTd6HJmyTsj-phKADa9uGNVKOQlY");
-        query_Param.add(map);
         response = RequestBuilder.performRequest("https://identitytoolkit.googleapis.com", null, "/v1/accounts:signUp", null, RequestMethod.POST,
-                null, query_Param, null, ContentType.JSON, HttpStatus.SC_OK, false);
+                null, map, null, HttpStatus.SC_OK, false, ContentType.JSON);
         Assert.assertEquals(response.statusCode(), 200);
         System.out.println(response.then().extract().body().asPrettyString());
     }
