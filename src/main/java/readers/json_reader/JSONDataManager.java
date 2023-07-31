@@ -1,9 +1,9 @@
-package utilities.reader_manager.json_reader;
+package readers.json_reader;
 
+import exceptions.ExceptionHandling;
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import utilities.exception_handling.ExceptionHandling;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
