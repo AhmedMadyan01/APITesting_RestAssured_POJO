@@ -7,8 +7,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,31 +17,29 @@ import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 
-@Getter
-@Setter
 public class RequestInitializer {
-    private String URI = null;
+    private String uri = null;
     private URL url = null;
-    private Integer portNumber = null;
-    private String path = null;
-    private RequestMethod method = null;
+    private Integer port = null;
+    private String basePath = null;
+    private RequestMethod requestMethod = null;
     private Object requestBody = null;
     private Map<String, String> headers = null;
     private Map<String, String> pathParams = null;
     private Map<String, String> queryParams = null;
     private Map<String, String> formParams = null;
-    private ContentType type = null;
-    private Boolean urlEncoding = false;
-    private Integer httpStatus = null;
+    private ContentType contentType = null;
+    private Boolean urlEncodingEnabled = false;
+    private Integer httpStatusCode = null;
     private RestAssuredConfig restAssuredConfig = null;
 
     public RequestInitializer setRequestMethod(@Nonnull RequestMethod requestMethod) {
-        setMethod(requestMethod);
+        this.requestMethod = requestMethod;
         return this;
     }
 
     public RequestInitializer setBaseUri(@Nonnull String uri) {
-        setURI(uri);
+        this.uri = uri;
         return this;
     }
 
@@ -56,63 +52,63 @@ public class RequestInitializer {
         return this;
     }
 
-    public RequestInitializer setBasePath(@Nonnull String path) {
-        setPath(path);
+    public RequestInitializer setBasePath(@Nonnull String basePath) {
+        this.basePath = basePath;
         return this;
     }
 
     public RequestInitializer setPort(@Nullable Integer port) {
-        setPortNumber(port);
+        this.port = port;
         return this;
     }
 
     public RequestInitializer setPort(@Nullable String port) {
-        setPortNumber(Integer.parseInt(Objects.requireNonNull(port)));
+        this.port = Integer.parseInt(Objects.requireNonNull(port));
         return this;
     }
 
     public RequestInitializer addHeaders(@Nullable Map<String, String> headers) {
-        setHeaders(headers);
+        this.headers = headers;
         return this;
     }
 
     public RequestInitializer addPathParams(@Nullable Map<String, String> pathParams) {
-        setPathParams(pathParams);
+        this.pathParams = pathParams;
         return this;
     }
 
     public RequestInitializer addQueryParams(@Nullable Map<String, String> queryParams) {
-        setQueryParams(queryParams);
+        this.queryParams = queryParams;
         return this;
     }
 
     public RequestInitializer addFormParams(@Nullable Map<String, String> formParams) {
-        setFormParams(formParams);
+        this.formParams = formParams;
         return this;
     }
 
     public RequestInitializer setBody(@Nullable Object requestBody) {
-        setRequestBody(requestBody);
+        this.requestBody = requestBody;
         return this;
     }
 
-    public RequestInitializer setExpectedStatusCode(@Nullable Integer httpStatus) {
-        setHttpStatus(httpStatus);
+    public RequestInitializer setExpectedStatusCode(@Nullable Integer httpStatusCode) {
+        this.httpStatusCode = httpStatusCode;
         return this;
     }
 
     public RequestInitializer setConfig(@Nullable RestAssuredConfig restAssuredConfig) {
-        setRestAssuredConfig(restAssuredConfig);
+        this.restAssuredConfig = restAssuredConfig;
         return this;
     }
 
     public RequestInitializer setContentType(@Nullable ContentType contentType) {
-        setType(contentType);
+        this.contentType = contentType;
         return this;
     }
 
     public RequestInitializer setUrlEncodingEnabled(@Nullable Boolean urlEncodingEnabled) {
-        setUrlEncoding(urlEncodingEnabled);
+        this.urlEncodingEnabled = urlEncodingEnabled;
         return this;
     }
 
@@ -126,23 +122,23 @@ public class RequestInitializer {
     private RequestSpecification buildRequest() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         try {
-            if (getURI() != null) {
-                requestSpecBuilder.setBaseUri(getURI());
+            if (uri != null) {
+                requestSpecBuilder.setBaseUri(uri);
             } else {
-                requestSpecBuilder.setBaseUri(getUrl().toURI());
+                requestSpecBuilder.setBaseUri(url.toURI());
             }
-            requestSpecBuilder.setBasePath(getPath());
-            if (getPortNumber() != null) {
-                requestSpecBuilder.setPort(getPortNumber());
+            requestSpecBuilder.setBasePath(basePath);
+            if (port != null) {
+                requestSpecBuilder.setPort(port);
             }
-            if (type != null) {
-                requestSpecBuilder.setContentType(getType());
+            if (contentType != null) {
+                requestSpecBuilder.setContentType(contentType);
             }
             if (headers != null && !headers.isEmpty()) {
-                requestSpecBuilder.addHeaders(getHeaders());
+                requestSpecBuilder.addHeaders(headers);
             }
             if (pathParams != null && !pathParams.isEmpty()) {
-                requestSpecBuilder.addPathParams(getPathParams());
+                requestSpecBuilder.addPathParams(pathParams);
             }
             if (queryParams != null && !queryParams.isEmpty()) {
                 requestSpecBuilder.addQueryParams(queryParams);
@@ -154,8 +150,8 @@ public class RequestInitializer {
                 requestSpecBuilder.setBody(requestBody);
             }
             requestSpecBuilder.setRelaxedHTTPSValidation();
-            requestSpecBuilder.setConfig(getRestAssuredConfig());
-            requestSpecBuilder.setUrlEncodingEnabled(getUrlEncoding());
+            requestSpecBuilder.setConfig(restAssuredConfig);
+            requestSpecBuilder.setUrlEncodingEnabled(urlEncodingEnabled);
             System.out.println("=============================================================================================================================================");
             requestSpecBuilder.log(LogDetail.ALL);
         } catch (Exception exception) {
@@ -172,27 +168,27 @@ public class RequestInitializer {
         try {
             given().relaxedHTTPSValidation();
             System.out.println("=============================================================================================================================================");
-            if (getURI() != null) {
-                System.out.println("Printing out all request specification details log for {Service URL: " + getURI() + getPath() + "}");
+            if (uri != null) {
+                System.out.println("Printing out all request specification details log for {Service URL: " + uri + basePath + "}");
             } else {
-                System.out.println("Printing out all request specification details log for {Service URL: " + getUrl() + getPath() + "}");
+                System.out.println("Printing out all request specification details log for {Service URL: " + url + basePath + "}");
             }
-            if (getHttpStatus() != null) {
-                switch (method) {
+            if (httpStatusCode != null) {
+                switch (requestMethod) {
                     case GET ->
-                            response = given().spec(buildRequest()).get().then().log().all().statusCode(getHttpStatus()).extract().response();
+                            response = given().spec(buildRequest()).get().then().log().all().statusCode(httpStatusCode).extract().response();
                     case POST ->
-                            response = given().spec(buildRequest()).post().then().log().all().statusCode(getHttpStatus()).extract().response();
+                            response = given().spec(buildRequest()).post().then().log().all().statusCode(httpStatusCode).extract().response();
                     case PUT ->
-                            response = given().spec(buildRequest()).put().then().log().all().statusCode(getHttpStatus()).extract().response();
+                            response = given().spec(buildRequest()).put().then().log().all().statusCode(httpStatusCode).extract().response();
                     case DELETE ->
-                            response = given().spec(buildRequest()).delete().then().log().all().statusCode(getHttpStatus()).extract().response();
+                            response = given().spec(buildRequest()).delete().then().log().all().statusCode(httpStatusCode).extract().response();
                     case PATCH ->
-                            response = given().spec(buildRequest()).patch().then().log().all().statusCode(getHttpStatus()).extract().response();
+                            response = given().spec(buildRequest()).patch().then().log().all().statusCode(httpStatusCode).extract().response();
                     default -> System.out.println("Kindly select valid HTTP request method");
                 }
             } else {
-                switch (method) {
+                switch (requestMethod) {
                     case GET -> response = given().spec(buildRequest()).get().then().log().all().extract().response();
                     case POST -> response = given().spec(buildRequest()).post().then().log().all().extract().response();
                     case PUT -> response = given().spec(buildRequest()).put().then().log().all().extract().response();
@@ -207,10 +203,10 @@ public class RequestInitializer {
             ExceptionHandling.handleException(e);
         }
         System.out.println("=============================================================================================================================================");
-        if (getURI() != null) {
-            System.out.println("All request specification details log have been logged for {Service URL: " + getURI() + getPath() + "}");
+        if (uri != null) {
+            System.out.println("All request specification details log have been logged for {Service URL: " + uri + basePath + "}");
         } else {
-            System.out.println("All request specification details log have been logged for {Service URL: " + getUrl() + getPath() + "}");
+            System.out.println("All request specification details log have been logged for {Service URL: " + url + basePath + "}");
         }
         System.out.println("=============================================================================================================================================");
         return response;

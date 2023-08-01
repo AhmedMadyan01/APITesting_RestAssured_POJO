@@ -2,14 +2,13 @@ package tests;
 
 import api.driver.APIActions;
 import api.driver.RequestMethod;
+import api.pojo.responses.content.Content_Res;
 import io.restassured.common.mapper.TypeRef;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import api.pojo.responses.content.Content;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ public class TestGetContent {
         HashMap<String, String> queryParametersMap = new HashMap<>();
         queryParametersMap.put("key", "AIzaSyAKKukGTd6HJmyTsj-phKADa9uGNVKOQlY");
         Response response = APIActions
-                .prepareRequest()
+                .setRequestSpecifications()
                 .setRequestMethod(RequestMethod.POST)
                 .setBaseUri(baseURI)
                 .setBasePath(baseBath)
@@ -43,7 +42,7 @@ public class TestGetContent {
         headersMap.put("token", bearerToken);
         System.out.println(headersMap);
         Response response = APIActions
-                .prepareRequest()
+                .setRequestSpecifications()
                 .setRequestMethod(RequestMethod.GET)
                 .setBaseUri(baseURI)
                 .setBasePath(baseBath)
@@ -51,15 +50,10 @@ public class TestGetContent {
                 .sendRequest();
 
         System.out.println(response.asPrettyString());
-        List<Content> contentList = response.as(new TypeRef<>() {
+        List<Content_Res> contentList = response.as(new TypeRef<>() {
         });
 
         System.out.println(contentList.get(0).getContentId());
-
-
-
-//        List<Content> contentList = response.as(new TypeRef<>() {
-//        });
-//        System.out.println(contentList.get(0));
+        System.out.println(contentList.get(0));
     }
 }
