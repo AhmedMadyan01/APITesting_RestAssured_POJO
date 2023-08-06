@@ -26,7 +26,7 @@
         <apache-commons-configuration.version>1.10</apache-commons-configuration.version>
 
         <testNG.version>7.6.0</testNG.version>
-        <selenium-java.version>4.10.0</selenium-java.version>
+        <selenium-java.version>4.11.0</selenium-java.version>
         <webdrivermanager.version>5.2.0</webdrivermanager.version>
         <rest-assured.version>5.1.1</rest-assured.version>
         <json-path-rest-assured.version>${rest-assured.version}</json-path-rest-assured.version>

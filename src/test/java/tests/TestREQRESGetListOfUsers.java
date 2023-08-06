@@ -66,16 +66,16 @@
 //    public void getUsersFirstName() {
 //        // Extract users first name using for loop
 //        for (int i = 0; i < users.getData().size(); i++) {
-//            System.out.println("User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
+//            System.out.println("trials.User " + (i + 1) + " First Name: " + users.getData().get(i).getFirst_name());
 //        }
 //        // Extract users first name using foreach
-//        users.getData().forEach(user -> System.out.println("User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
+//        users.getData().forEach(user -> System.out.println("trials.User ID\t" + ((int) (user.getId())) + "\tfirst name is:\t" + user.getFirst_name()));
 //    }
 //
 //    public void getUserEmailForUserIDNoTen() {
 //        for (int i = 0; i < users.getData().size(); i++) {
 //            if (users.getData().get(i).getId() == 10) {
-//                System.out.println("User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());
+//                System.out.println("trials.User ID\t" + ((int) (users.getData().get(i).getId())) + "\temail is:\t" + users.getData().get(i).getEmail());
 //            }
 //        }
 //    }

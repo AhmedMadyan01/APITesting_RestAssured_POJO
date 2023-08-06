@@ -1,3 +1,5 @@
+package trials;
+
 import api.driver.APIActions;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

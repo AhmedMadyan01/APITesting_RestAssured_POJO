@@ -1,6 +1,6 @@
 //package tests;
 //
-//import api.pojo.responses.create_user.User;
+//import api.pojo.responses.create_user.trials.User;
 //import tests.pojo_request_payload.reqres.CreateUser;
 //import io.restassured.RestAssured;
 //import io.restassured.response.Response;
@@ -11,7 +11,7 @@
 //
 //public class TestREQRESCreateUser {
 //    private static final CreateUser createUser = new CreateUser();
-//    private static User user = new User();
+//    private static trials.User user = new trials.User();
 //
 //    private static Response response;
 //
@@ -27,7 +27,7 @@
 //                when().
 //                post().
 //                then().extract().response();
-//        user = response.as(User.class);
+//        user = response.as(trials.User.class);
 //        System.out.println(response.then().extract().body().asPrettyString());
 //        return response;
 //    }

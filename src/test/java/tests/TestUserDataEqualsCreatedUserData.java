@@ -9,6 +9,6 @@
 //        CreateUser createUser = new CreateUser();
 //        createUser.setName("Ahmed");
 //        createUser.setJob("Software Test Automation Engineer");
-////        User user = RestAssured.given().when().post("https://reqres.in/api/users").body().as(CreateUsers.class).(User.class);
+////        trials.User user = RestAssured.given().when().post("https://reqres.in/api/users").body().as(CreateUsers.class).(trials.User.class);
 //    }
 //}
