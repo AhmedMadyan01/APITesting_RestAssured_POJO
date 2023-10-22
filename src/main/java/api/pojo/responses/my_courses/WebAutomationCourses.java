@@ -1,0 +1,22 @@
+package api.pojo.responses.my_courses;
+
+public class WebAutomationCourses {
+    private String courseTitle;
+    private String price;
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+}

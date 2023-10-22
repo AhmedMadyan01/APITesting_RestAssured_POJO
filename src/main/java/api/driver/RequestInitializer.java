@@ -1,12 +1,15 @@
 package api.driver;
 
-import exceptions.ExceptionHandling;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import exceptions.Exceptions;
+import io.restassured.RestAssured;
+import io.restassured.authentication.AuthenticationScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RestAssuredConfig;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import logger.Log4JLogger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -14,8 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Objects;
-
-import static io.restassured.RestAssured.given;
 
 public class RequestInitializer {
     private String uri = null;
@@ -29,21 +30,22 @@ public class RequestInitializer {
     private Map<String, String> queryParams = null;
     private Map<String, String> formParams = null;
     private ContentType contentType = null;
-    private Boolean urlEncodingEnabled = false;
+    private Boolean urlEncodingEnabled = null;
     private Integer httpStatusCode = null;
     private RestAssuredConfig restAssuredConfig = null;
+    private AuthenticationScheme authenticationScheme = null;
 
-    public RequestInitializer setRequestMethod(@Nonnull RequestMethod requestMethod) {
+    public RequestInitializer setRequestMethod(@Nonnull final RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
         return this;
     }
 
-    public RequestInitializer setBaseUri(@Nonnull String uri) {
+    public RequestInitializer setBaseUri(@Nonnull final String uri) {
         this.uri = uri;
         return this;
     }
 
-    public RequestInitializer setBaseUri(@Nonnull URL uri) {
+    public RequestInitializer setBaseUri(@Nonnull final URL uri) {
         try {
             url = new URL(uri.toString());
         } catch (MalformedURLException e) {
@@ -52,63 +54,68 @@ public class RequestInitializer {
         return this;
     }
 
-    public RequestInitializer setBasePath(@Nonnull String basePath) {
+    public RequestInitializer setBasePath(@Nonnull final String basePath) {
         this.basePath = basePath;
         return this;
     }
 
-    public RequestInitializer setPort(@Nullable Integer port) {
+    public RequestInitializer setPort(@Nullable final Integer port) {
         this.port = port;
+        Log4JLogger.logINFO(getClass(), "Port: " + port);
         return this;
     }
 
-    public RequestInitializer setPort(@Nullable String port) {
+    public RequestInitializer setPort(@Nullable final String port) {
         this.port = Integer.parseInt(Objects.requireNonNull(port));
         return this;
     }
 
-    public RequestInitializer addHeaders(@Nullable Map<String, String> headers) {
+    public RequestInitializer addHeaders(@Nullable final Map<String, String> headers) {
         this.headers = headers;
         return this;
     }
 
-    public RequestInitializer addPathParams(@Nullable Map<String, String> pathParams) {
+    public RequestInitializer addPathParams(@Nullable final Map<String, String> pathParams) {
         this.pathParams = pathParams;
         return this;
     }
 
-    public RequestInitializer addQueryParams(@Nullable Map<String, String> queryParams) {
+    public RequestInitializer addQueryParams(@Nullable final Map<String, String> queryParams) {
         this.queryParams = queryParams;
         return this;
     }
 
-    public RequestInitializer addFormParams(@Nullable Map<String, String> formParams) {
+    public RequestInitializer addFormParams(@Nullable final Map<String, String> formParams) {
         this.formParams = formParams;
         return this;
     }
 
-    public RequestInitializer setBody(@Nullable Object requestBody) {
+    public RequestInitializer setBody(@Nullable final Object requestBody) {
         this.requestBody = requestBody;
         return this;
     }
-
-    public RequestInitializer setExpectedStatusCode(@Nullable Integer httpStatusCode) {
+    public RequestInitializer setExpectedStatusCode(@Nullable final Integer httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
         return this;
     }
 
-    public RequestInitializer setConfig(@Nullable RestAssuredConfig restAssuredConfig) {
+    public RequestInitializer setConfig(@Nullable final RestAssuredConfig restAssuredConfig) {
         this.restAssuredConfig = restAssuredConfig;
         return this;
     }
 
-    public RequestInitializer setContentType(@Nullable ContentType contentType) {
+    public RequestInitializer setContentType(@Nullable final ContentType contentType) {
         this.contentType = contentType;
         return this;
     }
 
-    public RequestInitializer setUrlEncodingEnabled(@Nullable Boolean urlEncodingEnabled) {
+    public RequestInitializer setUrlEncodingEnabled(@Nullable final Boolean urlEncodingEnabled) {
         this.urlEncodingEnabled = urlEncodingEnabled;
+        return this;
+    }
+
+    public RequestInitializer setAuth(@Nullable final AuthenticationScheme authenticationScheme) {
+        this.authenticationScheme = authenticationScheme;
         return this;
     }
 
@@ -120,43 +127,99 @@ public class RequestInitializer {
      * Build API Request Specification
      */
     private RequestSpecification buildRequest() {
+        Log4JLogger.logINFO(getClass(), "------------------------------------------------------------------------------------------------------------------------------------");
+        if (uri != null) {
+            Log4JLogger.logINFO(getClass(), new Object() {
+            }.getClass().getEnclosingMethod().getName(), "Printing out all request specification details log for {Service URL: " + uri + basePath + "}");
+        } else {
+            Log4JLogger.logINFO(getClass(), new Object() {
+            }.getClass().getEnclosingMethod().getName(), "Printing out all request specification details log for {Service URL: " + url + basePath + "}");
+        }
+        Log4JLogger.logINFO(getClass(), "------------------------------------------------------------------------------------------------------------------------------------");
+        Log4JLogger.logINFO(getClass(), "RequestMethod: " + requestMethod);
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         try {
             if (uri != null) {
                 requestSpecBuilder.setBaseUri(uri);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "BaseUri: " + uri);
             } else {
                 requestSpecBuilder.setBaseUri(url.toURI());
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "BaseUri: " + url);
             }
-            requestSpecBuilder.setBasePath(basePath);
+            if (basePath != null) {
+                requestSpecBuilder.setBasePath(basePath);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "BasePath: " + basePath);
+            }
             if (port != null) {
                 requestSpecBuilder.setPort(port);
-            }
-            if (contentType != null) {
-                requestSpecBuilder.setContentType(contentType);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Port: " + port);
             }
             if (headers != null && !headers.isEmpty()) {
                 requestSpecBuilder.addHeaders(headers);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Headers: " + headers);
             }
             if (pathParams != null && !pathParams.isEmpty()) {
                 requestSpecBuilder.addPathParams(pathParams);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Path Params: " + pathParams);
             }
             if (queryParams != null && !queryParams.isEmpty()) {
                 requestSpecBuilder.addQueryParams(queryParams);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Query Params: " + queryParams);
             }
             if (formParams != null && !formParams.isEmpty()) {
                 requestSpecBuilder.addFormParams(formParams);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Form Params: " + formParams);
             }
             if (requestBody != null) {
                 requestSpecBuilder.setBody(requestBody);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Body JSON Object: {} " + new ObjectMapper().writeValueAsString(requestBody));
+            }
+            if (httpStatusCode != null) {
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "ExpectedStatusCode: " + httpStatusCode);
+            }
+            if (restAssuredConfig != null) {
+                requestSpecBuilder.setConfig(restAssuredConfig);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Rest-assured Config: " + restAssuredConfig);
+            }
+            if (contentType != null) {
+                requestSpecBuilder.setContentType(contentType);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Content Type: " + contentType);
+            }
+            if (urlEncodingEnabled != null) {
+                requestSpecBuilder.setUrlEncodingEnabled(urlEncodingEnabled);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "URL Encoding Enabled: " + urlEncodingEnabled);
+            }
+            if (authenticationScheme != null) {
+                requestSpecBuilder.setAuth(authenticationScheme);
+                Log4JLogger.logINFO(getClass(), new Object() {
+                }.getClass().getEnclosingMethod().getName(), "Authentication Scheme: " + authenticationScheme);
             }
             requestSpecBuilder.setRelaxedHTTPSValidation();
-            requestSpecBuilder.setConfig(restAssuredConfig);
-            requestSpecBuilder.setUrlEncodingEnabled(urlEncodingEnabled);
-            System.out.println("=============================================================================================================================================");
-            requestSpecBuilder.log(LogDetail.ALL);
-        } catch (Exception exception) {
-            ExceptionHandling.handleException(exception);
+        } catch (Exception e) {
+            Exceptions.handle(getClass(), e);
         }
+        Log4JLogger.logINFO(getClass(), "------------------------------------------------------------------------------------------------------------------------------------");
+        if (uri != null) {
+            Log4JLogger.logINFO(getClass(), new Object() {
+            }.getClass().getEnclosingMethod().getName(), "All request specification details log have been logged for {Service URL: " + uri + basePath + "}");
+        } else {
+            Log4JLogger.logINFO(getClass(), new Object() {
+            }.getClass().getEnclosingMethod().getName(), "All request specification details log have been logged for {Service URL: " + url + basePath + "}");
+        }
+        Log4JLogger.logINFO(getClass(), "------------------------------------------------------------------------------------------------------------------------------------");
         return requestSpecBuilder.build();
     }
 
@@ -166,49 +229,37 @@ public class RequestInitializer {
     private Response send() {
         Response response = null;
         try {
-            given().relaxedHTTPSValidation();
-            System.out.println("=============================================================================================================================================");
-            if (uri != null) {
-                System.out.println("Printing out all request specification details log for {Service URL: " + uri + basePath + "}");
-            } else {
-                System.out.println("Printing out all request specification details log for {Service URL: " + url + basePath + "}");
-            }
             if (httpStatusCode != null) {
                 switch (requestMethod) {
                     case GET ->
-                            response = given().spec(buildRequest()).get().then().log().all().statusCode(httpStatusCode).extract().response();
+                            response = RestAssured.given().spec(buildRequest()).get().then().statusCode(httpStatusCode).extract().response();
                     case POST ->
-                            response = given().spec(buildRequest()).post().then().log().all().statusCode(httpStatusCode).extract().response();
+                            response = RestAssured.given().spec(buildRequest()).post().then().statusCode(httpStatusCode).extract().response();
                     case PUT ->
-                            response = given().spec(buildRequest()).put().then().log().all().statusCode(httpStatusCode).extract().response();
+                            response = RestAssured.given().spec(buildRequest()).put().then().statusCode(httpStatusCode).extract().response();
                     case DELETE ->
-                            response = given().spec(buildRequest()).delete().then().log().all().statusCode(httpStatusCode).extract().response();
+                            response = RestAssured.given().spec(buildRequest()).delete().then().statusCode(httpStatusCode).extract().response();
                     case PATCH ->
-                            response = given().spec(buildRequest()).patch().then().log().all().statusCode(httpStatusCode).extract().response();
-                    default -> System.out.println("Kindly select valid HTTP request method");
+                            response = RestAssured.given().spec(buildRequest()).patch().then().statusCode(httpStatusCode).extract().response();
+                    default -> Log4JLogger.logWARN(getClass(), new Object() {
+                    }.getClass().getEnclosingMethod().getName(), "Kindly select valid HTTP request method");
                 }
             } else {
                 switch (requestMethod) {
-                    case GET -> response = given().spec(buildRequest()).get().then().log().all().extract().response();
-                    case POST -> response = given().spec(buildRequest()).post().then().log().all().extract().response();
-                    case PUT -> response = given().spec(buildRequest()).put().then().log().all().extract().response();
+                    case GET -> response = RestAssured.given().spec(buildRequest()).get().then().extract().response();
+                    case POST -> response = RestAssured.given().spec(buildRequest()).post().then().extract().response();
+                    case PUT -> response = RestAssured.given().spec(buildRequest()).put().then().extract().response();
                     case DELETE ->
-                            response = given().spec(buildRequest()).delete().then().log().all().extract().response();
+                            response = RestAssured.given().spec(buildRequest()).delete().then().extract().response();
                     case PATCH ->
-                            response = given().spec(buildRequest()).patch().then().log().all().extract().response();
-                    default -> System.out.println("Kindly select valid HTTP request method");
+                            response = RestAssured.given().spec(buildRequest()).patch().then().extract().response();
+                    default -> Log4JLogger.logWARN(getClass(), "Kindly select valid HTTP request method");
                 }
             }
         } catch (Exception e) {
-            ExceptionHandling.handleException(e);
+            Exceptions.handle(getClass(), e);
         }
-        System.out.println("=============================================================================================================================================");
-        if (uri != null) {
-            System.out.println("All request specification details log have been logged for {Service URL: " + uri + basePath + "}");
-        } else {
-            System.out.println("All request specification details log have been logged for {Service URL: " + url + basePath + "}");
-        }
-        System.out.println("=============================================================================================================================================");
+        Log4JLogger.logINFO(getClass(), new Object() {}.getClass().getEnclosingMethod().getName(), "Response payload: " + Objects.requireNonNull(response).getBody().asPrettyString());
         return response;
     }
 }

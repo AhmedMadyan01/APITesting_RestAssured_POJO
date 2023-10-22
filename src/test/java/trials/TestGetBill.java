@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -21,24 +20,26 @@ import static api.driver.RequestMethod.POST;
 public class TestGetBill {
     String baseURI = ("https://api.non-prod.vf-itaap.engineering.vodafone.com");
     String endPoint = ("/bill-analysis-js/api/v1/bill");
-    private static WebDriver webDriver;
     private static String codeValue;
     private static String bearerToken;
 
 
-    @BeforeTest
+    @Test
     public void generateAndExtractCode() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setAcceptInsecureCerts(true);
-        chromeOptions.setHeadless(true);
+//        chromeOptions.addArguments("--headless=new");
+        chromeOptions.addArguments("x-bypassCaptcha-flag: true");
 
         By USERNAME_TEXT_BOX = By.id("identifier");
         By PASSWORD_TEXT_BOX = By.id("password");
         By CONTINUE_BUTTON = By.id("continueButton");
         By COOKIES_OK_BUTTON = By.id("cookieOkButton");
-
-        webDriver = new ChromeDriver(chromeOptions);
+        By CAPTCHA = By.xpath("//div[@class='rc-imageselect-payload']");
+        String antiCaptchaKey = ("4f77a50429a43bea5719ca024f825528");
+        WebDriver webDriver = new ChromeDriver(chromeOptions);
         webDriver.get("https://hub.dev.external.nonprod.id-euc1.aws.cps.vodafone.com/oidc/authorize?login_hint=OPCO%3AIE&acr_values=urn%3Avodafone%3Aloa%3Asilver&scope=openid+phone+offline_access+profile&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Ftest&state=d1ccf7f8-6033-45c7-8382-3609586ba8fc&nonce=728e5fa1-fa98-4394-a757-a5b463ba4120&client_id=OneApp");
+        webDriver.manage().window().maximize();
         Thread.sleep(5000);
         webDriver.findElement(COOKIES_OK_BUTTON).click();
         webDriver.findElement(USERNAME_TEXT_BOX).sendKeys("supertest1810@yopmail.com");
@@ -53,12 +54,11 @@ public class TestGetBill {
         System.out.println("Code= " + codeValue);
     }
 
-    @BeforeTest(dependsOnMethods = "generateAndExtractCode")
+    //    @BeforeTest(dependsOnMethods = "generateAndExtractCode")
     public void generateAndExtractBearerToken() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
         headers.put("Accept", "application/json");
-
 
         Map<String, String> body = new HashMap<>();
         body.put("grant_type", "authorization_code");
@@ -81,7 +81,7 @@ public class TestGetBill {
     }
 
 
-    @Test
+    //    @Test
     public void sendRequest() {
         Map<String, String> query_map = new HashMap<>();
         query_map.put("billingAccount.id", "1901990112");

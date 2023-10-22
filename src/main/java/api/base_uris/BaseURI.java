@@ -7,7 +7,8 @@ public enum BaseURI {
     FIREBASE_AUTHENTICATION("https://www.googleapis.com"),
     FIREBASE_ANONYMOUS("https://identitytoolkit.googleapis.com"),
     ST("https://cybersa.mocklab.io"),
-    SIT("https://api.dev.to-zi.com");
+    SIT("https://api.dev.to-zi.com"),
+    PROD("https://api.prod.to-zi.com");
 
     private final String baseURI;
 
