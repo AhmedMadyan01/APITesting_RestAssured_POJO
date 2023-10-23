@@ -2,7 +2,7 @@ package tests;
 
 import api.driver.APIActions;
 import api.driver.RequestMethod;
-import api.pojo.responses.content.Content;
+import api.pojo.responses.content.Content_Res;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -50,7 +50,7 @@ public class TestGetContent {
                 .sendRequest();
 
         System.out.println(response.asPrettyString());
-        List<Content> contentList = response.as(new TypeRef<>() {
+        List<Content_Res> contentList = response.as(new TypeRef<>() {
         });
 
         System.out.println(contentList.get(0).getContentId());
