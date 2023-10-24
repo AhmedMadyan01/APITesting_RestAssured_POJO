@@ -230,21 +230,21 @@ public class RequestInitializer {
         try {
             if (httpStatusCode != null) {
                 switch (requestMethod) {
-                    case GET -> response = new GetRequest().sendRequest(buildRequest(), httpStatusCode);
-                    case POST -> response = new PostRequest().sendRequest(buildRequest(), httpStatusCode);
-                    case PUT -> response = new PutRequest().sendRequest(buildRequest(), httpStatusCode);
-                    case DELETE -> response = new DeleteRequest().sendRequest(buildRequest(), httpStatusCode);
-                    case PATCH -> response = new PatchRequest().sendRequest(buildRequest(), httpStatusCode);
+                    case GET -> response = new GetRequest().send(buildRequest(), httpStatusCode);
+                    case POST -> response = new PostRequest().send(buildRequest(), httpStatusCode);
+                    case PUT -> response = new PutRequest().send(buildRequest(), httpStatusCode);
+                    case DELETE -> response = new DeleteRequest().send(buildRequest(), httpStatusCode);
+                    case PATCH -> response = new PatchRequest().send(buildRequest(), httpStatusCode);
                     default -> Log4JLogger.logWARN(getClass(), new Object() {
                     }.getClass().getEnclosingMethod().getName(), "Kindly select valid HTTP request method");
                 }
             } else {
                 switch (requestMethod) {
-                    case GET -> response = new GetRequest().sendRequest(buildRequest());
-                    case POST -> response = new PostRequest().sendRequest(buildRequest());
-                    case PUT -> response = new PutRequest().sendRequest(buildRequest());
-                    case DELETE -> response = new DeleteRequest().sendRequest(buildRequest());
-                    case PATCH -> response = new PatchRequest().sendRequest(buildRequest());
+                    case GET -> response = new GetRequest().send(buildRequest());
+                    case POST -> response = new PostRequest().send(buildRequest());
+                    case PUT -> response = new PutRequest().send(buildRequest());
+                    case DELETE -> response = new DeleteRequest().send(buildRequest());
+                    case PATCH -> response = new PatchRequest().send(buildRequest());
                     default -> Log4JLogger.logWARN(getClass(), "Kindly select valid HTTP request method");
                 }
             }

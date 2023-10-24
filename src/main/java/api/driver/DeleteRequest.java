@@ -4,14 +4,14 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class DeleteRequest extends SendRequest {
+public class DeleteRequest extends RequestSender {
     @Override
-    Response sendRequest(RequestSpecification requestSpecification) {
+    Response send(RequestSpecification requestSpecification) {
         return RestAssured.given().spec(requestSpecification).delete().then().extract().response();
     }
 
     @Override
-    Response sendRequest(RequestSpecification requestSpecification, Integer httpStatus) {
+    Response send(RequestSpecification requestSpecification, Integer httpStatus) {
         return RestAssured.given().spec(requestSpecification).delete().then().statusCode(httpStatus).extract().response();
     }
 }
